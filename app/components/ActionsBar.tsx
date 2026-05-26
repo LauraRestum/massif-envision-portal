@@ -7,11 +7,21 @@ interface ActionsBarProps {
 export default function ActionsBar({ onSubmit }: ActionsBarProps) {
   return (
     <div className="actions-bar">
-      <button className="action" onClick={() => window.print()}>
-        ⬇ Export PDF
+      <button
+        type="button"
+        className="action"
+        onClick={() => window.print()}
+        aria-label="Export pipeline as PDF"
+      >
+        <span aria-hidden="true">⬇</span> Export PDF
       </button>
-      <button className="action primary" onClick={onSubmit}>
-        + Submit Update
+      <button
+        type="button"
+        className="action primary"
+        onClick={onSubmit}
+        aria-label="Submit an update to the pipeline"
+      >
+        <span aria-hidden="true">+</span> Submit Update
       </button>
     </div>
   );
