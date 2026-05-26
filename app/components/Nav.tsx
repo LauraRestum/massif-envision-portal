@@ -4,9 +4,15 @@ interface NavProps {
   liveCount: number;
   query: string;
   onQueryChange: (value: string) => void;
+  lastUpdate: string;
 }
 
-export default function Nav({ liveCount, query, onQueryChange }: NavProps) {
+export default function Nav({
+  liveCount,
+  query,
+  onQueryChange,
+  lastUpdate,
+}: NavProps) {
   return (
     <nav className="nav" aria-label="Primary">
       <div className="nav-brand">
@@ -35,7 +41,7 @@ export default function Nav({ liveCount, query, onQueryChange }: NavProps) {
       </div>
 
       <div className="nav-meta" aria-live="polite">
-        <span>Last Update 2026.05.20</span>
+        <span>Last Update {lastUpdate}</span>
         <span>
           <span id="liveCount">{liveCount}</span> Active Lines
         </span>
