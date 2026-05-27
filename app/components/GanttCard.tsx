@@ -1,29 +1,41 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { PipelineLine } from "@/lib/types";
+import { phasesFor, schedulePct } from "@/lib/types";
 
-interface GanttRow {
-  name: string;
-  phase: string;
-  bar: { cls: "complete" | "active" | "future"; label: string; left: string; width: string };
-}
-
-const ROWS: GanttRow[] = [
-  { name: "Tech Pack", phase: "01 / COMPLETE", bar: { cls: "complete", label: "RECEIVED", left: "0%", width: "16.6%" } },
-  { name: "Sample Approval", phase: "02 / COMPLETE", bar: { cls: "complete", label: "APPROVED", left: "8.3%", width: "25%" } },
-  { name: "Quote Submitted", phase: "03 / COMPLETE", bar: { cls: "complete", label: "DONE", left: "25%", width: "8.3%" } },
-  { name: "Pattern Engineering", phase: "04 / ACTIVE NOW", bar: { cls: "active", label: "IN PROGRESS", left: "33.3%", width: "25%" } },
-  { name: "Material Sourcing", phase: "05 / PLANNED", bar: { cls: "future", label: "PLANNED", left: "50%", width: "25%" } },
-  { name: "Production Run", phase: "06 / SEPT-OCT", bar: { cls: "future", label: "SEPT-OCT", left: "66.6%", width: "25%" } },
-  { name: "Delivery Window", phase: "07 / NOV-DEC", bar: { cls: "future", label: "NOV-DEC", left: "83.3%", width: "16.6%" } },
+const MONTHS = [
+  "JAN",
+  "FEB",
+  "MAR",
+  "APR",
+  "MAY",
+  "JUN",
+  "JUL",
+  "AUG",
+  "SEP",
+  "OCT",
+  "NOV",
+  "DEC",
 ];
 
-const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+interface GanttCardProps {
+  programs: PipelineLine[];
+  selected: PipelineLine;
+  onSelect: (est: string) => void;
+}
 
-export default function GanttCard() {
+export default function GanttCard({ programs, selected, onSelect }: GanttCardProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLElement>(null);
+
+  const rows = phasesFor(selected);
+  const pct = schedulePct(selected);
+  const isPriority = !!selected.priority;
+  const qtyText = selected.annualQty
+    ? `${selected.annualQty.toLocaleString()} annual units. EST ${selected.est} / ${selected.sku}.`
+    : `EST ${selected.est} / ${selected.sku}.`;
 
   // Parallax
   useEffect(() => {
@@ -86,7 +98,7 @@ export default function GanttCard() {
       window.removeEventListener("resize", updateGanttLabels);
       window.clearTimeout(t);
     };
-  }, []);
+  }, [selected]);
 
   return (
     <section className="gantt-section" ref={rootRef}>
@@ -96,18 +108,32 @@ export default function GanttCard() {
           <div className="gantt-hero-overlay"></div>
           <div className="gantt-hero-content">
             <div className="gantt-hero-left">
-              <div className="gantt-hero-tag">FLAGSHIP PROGRAM</div>
-              <span className="priority-tag">Priority Build</span>
-              <h2>
-                Flight Suit Pant <em>Military V1</em>
-              </h2>
-              <p className="desc">
-                13,000 annual units. Weekly cadence at 250 units. September to
-                October 2026 production. EST 1054 / MPNT00069.
-              </p>
+              <div className="gantt-hero-tag">
+                {isPriority ? "FLAGSHIP PROGRAM" : "PROGRAM SCHEDULE"}
+              </div>
+              {isPriority && <span className="priority-tag">Priority Build</span>}
+              <h2>{selected.desc}</h2>
+              <p className="desc">{qtyText}</p>
+              <div className="gantt-selector">
+                <label htmlFor="ganttSelect" className="visually-hidden">
+                  Select program to schedule
+                </label>
+                <select
+                  id="ganttSelect"
+                  className="gantt-select"
+                  value={selected.est}
+                  onChange={(e) => onSelect(e.target.value)}
+                >
+                  {programs.map((p) => (
+                    <option key={p.est} value={p.est}>
+                      {p.priority ? "★ " : ""}EST {p.est} — {p.desc}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
             <div className="gantt-hero-right">
-              <div className="val">32%</div>
+              <div className="val">{pct}%</div>
               <div className="lbl">Schedule Complete</div>
             </div>
           </div>
@@ -124,7 +150,7 @@ export default function GanttCard() {
               ))}
             </div>
 
-            {ROWS.map((row) => (
+            {rows.map((row) => (
               <div key={row.name} className="gantt-row">
                 <div className="gantt-rowlabel">
                   <div className="name">{row.name}</div>
@@ -135,11 +161,11 @@ export default function GanttCard() {
                     <div key={i} className="month-cell"></div>
                   ))}
                   <div
-                    className={`gantt-bar ${row.bar.cls}`}
-                    data-label={row.bar.label}
-                    style={{ left: row.bar.left, width: row.bar.width }}
+                    className={`gantt-bar ${row.cls}`}
+                    data-label={row.label}
+                    style={{ left: row.left, width: row.width }}
                   >
-                    {row.bar.cls === "active" && (
+                    {row.cls === "active" && (
                       <>
                         <span className="shimmer"></span>
                         <span className="pulse-dot"></span>

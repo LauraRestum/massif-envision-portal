@@ -1,20 +1,31 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { PipelineLine, PipelineStatus } from "@/lib/types";
 
-interface Stat {
+type FilterKey = "all" | PipelineStatus;
+
+interface KpiStatsProps {
+  data: PipelineLine[];
+  filter: FilterKey;
+  onFilterChange: (f: FilterKey) => void;
+}
+
+interface StatDef {
+  key: FilterKey | "forecast";
   cls: string;
-  value: string;
   label: string;
 }
 
-const STATS: Stat[] = [
-  { cls: "s-pending", value: "07", label: "Pending" },
-  { cls: "s-quoted", value: "01", label: "Quoted" },
-  { cls: "s-accepted", value: "05", label: "Accepted" },
-  { cls: "s-production", value: "02", label: "Production" },
-  { cls: "stat-feat", value: "$2.6M", label: "Weighted Forecast" },
+const STATS: StatDef[] = [
+  { key: "pending", cls: "s-pending", label: "Pending" },
+  { key: "quoted", cls: "s-quoted", label: "Quoted" },
+  { key: "accepted", cls: "s-accepted", label: "Accepted" },
+  { key: "production", cls: "s-production", label: "Production" },
+  { key: "forecast", cls: "stat-feat", label: "Weighted Forecast" },
 ];
+
+const FORECAST_DISPLAY = "$2.6M";
 
 function animateCount(el: HTMLElement, target: string, duration = 1500) {
   const start = performance.now();
@@ -36,17 +47,25 @@ function animateCount(el: HTMLElement, target: string, duration = 1500) {
     if (t < 1) {
       requestAnimationFrame(tick);
     } else {
-      el.textContent = isCurrency
-        ? target
-        : String(Math.round(numericTarget)).padStart(2, "0");
+      el.textContent = target;
     }
   }
   el.textContent = isCurrency ? "$0.0M" : "00";
   requestAnimationFrame(tick);
 }
 
-export default function KpiStats() {
+export default function KpiStats({ data, filter, onFilterChange }: KpiStatsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const counts: Record<PipelineStatus, number> = {
+    pending: 0,
+    quoted: 0,
+    accepted: 0,
+    production: 0,
+  };
+  for (const row of data) {
+    counts[row.status]++;
+  }
 
   useEffect(() => {
     const respectReducedMotion = window.matchMedia(
@@ -65,13 +84,44 @@ export default function KpiStats() {
   }, []);
 
   return (
-    <div className="stats" ref={containerRef}>
-      {STATS.map((s) => (
-        <div key={s.label} className={`stat ${s.cls}`}>
-          <div className="v">{s.value}</div>
-          <div className="l">{s.label}</div>
-        </div>
-      ))}
+    <div
+      className="stats"
+      ref={containerRef}
+      role="group"
+      aria-label="Pipeline status filters"
+    >
+      {STATS.map((s) => {
+        const value =
+          s.key === "forecast"
+            ? FORECAST_DISPLAY
+            : String(counts[s.key as PipelineStatus]).padStart(2, "0");
+        const isFilter = s.key !== "forecast";
+        const isActive = isFilter && filter === s.key;
+        const handleToggle = () => {
+          if (!isFilter) return;
+          onFilterChange(filter === s.key ? "all" : (s.key as FilterKey));
+        };
+        return (
+          <button
+            key={s.label}
+            type="button"
+            className={`stat ${s.cls}${isActive ? " is-active" : ""}${
+              !isFilter ? " is-static" : ""
+            }`}
+            onClick={handleToggle}
+            disabled={!isFilter}
+            aria-pressed={isFilter ? isActive : undefined}
+            aria-label={
+              isFilter
+                ? `${isActive ? "Clear" : "Filter by"} ${s.label} (${value})`
+                : `${s.label} ${value}`
+            }
+          >
+            <div className="v">{value}</div>
+            <div className="l">{s.label}</div>
+          </button>
+        );
+      })}
     </div>
   );
 }
