@@ -442,7 +442,6 @@
     color: #fff;
     box-shadow: 0 0 16px rgba(120,190,33,0.4);
     animation: barPulse 2.5s ease-in-out infinite;
-    position: relative;
   }
   .gantt-bar.active .shimmer {
     position: absolute; inset: 0;

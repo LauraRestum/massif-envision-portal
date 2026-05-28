@@ -32,8 +32,71 @@
   { "est": "1054.a", "desc": "Flight Suit Pant Military V2 OCP", "sku": "MPNT00069O", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-05-19" },
   { "est": "1054.b", "desc": "Flight Suit Pant Military V3 MP249A", "sku": "MPNT00069", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-05-19" },
   { "est": "1054.c", "desc": "Flight Suit Pant Military V4 MP249A", "sku": "MPNT00084", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-05-19" },
-  { "est": "1037", "desc": "Inversion Bottom Lightweight", "sku": "MPNT00103", "status": "accepted", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 4500, "price": 15.77, "updatedAt": "2026-05-14" },
+  {
+    "est": "1037",
+    "desc": "Inversion Bottom Lightweight",
+    "sku": "MPNT00103",
+    "status": "accepted",
+    "awaitingFrom": "massif",
+    "awaitingItem": "Pattern",
+    "annualQty": 4500,
+    "price": 15.77,
+    "updatedAt": "2026-05-14",
+    "schedulePct": 38,
+    "phases": [
+      { "name": "Tech Pack", "phase": "01 / COMPLETE", "cls": "complete", "label": "RECEIVED", "left": "0%", "width": "8.3%" },
+      { "name": "Sample Approval", "phase": "02 / COMPLETE", "cls": "complete", "label": "APPROVED", "left": "8.3%", "width": "16.6%" },
+      { "name": "Quote Submitted", "phase": "03 / COMPLETE", "cls": "complete", "label": "DONE", "left": "25%", "width": "8.3%" },
+      { "name": "Pattern Engineering", "phase": "04 / ACTIVE NOW", "cls": "active", "label": "IN PROGRESS", "left": "33.3%", "width": "16.6%" },
+      { "name": "Material Delivery", "phase": "05 / MILESTONE", "cls": "future", "label": "MATERIAL DELIVERY", "left": "50%", "width": "0%", "milestone": true },
+      { "name": "First Article Validation", "phase": "06 / PLANNED", "cls": "future", "label": "PLANNED", "left": "50%", "width": "16.6%" },
+      { "name": "Ramp Up / Jump Run", "phase": "07 / PLANNED", "cls": "future", "label": "RAMP UP", "left": "66.6%", "width": "25%" },
+      { "name": "Production Run Live", "phase": "08 / MILESTONE", "cls": "future", "label": "PRODUCTION RUN LIVE", "left": "91.6%", "width": "0%", "milestone": true }
+    ]
+  },
   { "est": "1014", "desc": "Advanced Quarter Zip Combat Shirt", "sku": "MCMS000320", "status": "quoted", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": null, "price": 43.87, "updatedAt": "2026-04-28" },
-  { "est": "1002", "desc": "Inversion T-Shirt, SS Lightweight", "sku": "MSRT00082", "status": "production", "awaitingFrom": null, "awaitingItem": null, "annualQty": null, "price": 7.25, "updatedAt": "2026-05-10" },
-  { "est": "1003", "desc": "Inversion T-Shirt, LS Lightweight", "sku": "MSRT00083", "status": "production", "awaitingFrom": null, "awaitingItem": null, "annualQty": null, "price": 9.20, "updatedAt": "2026-05-10" }
+  {
+    "est": "1002",
+    "desc": "Inversion T-Shirt, SS Lightweight",
+    "sku": "MSRT00082",
+    "status": "production",
+    "awaitingFrom": null,
+    "awaitingItem": null,
+    "annualQty": null,
+    "price": 7.25,
+    "updatedAt": "2026-05-10",
+    "schedulePct": 84,
+    "phases": [
+      { "name": "Tech Pack", "phase": "01 / COMPLETE", "cls": "complete", "label": "RECEIVED", "left": "0%", "width": "6.6%" },
+      { "name": "Sample Approval", "phase": "02 / COMPLETE", "cls": "complete", "label": "APPROVED", "left": "6.6%", "width": "8.3%" },
+      { "name": "Quote Submitted", "phase": "03 / COMPLETE", "cls": "complete", "label": "DONE", "left": "15%", "width": "6.6%" },
+      { "name": "Pattern Engineering", "phase": "04 / COMPLETE", "cls": "complete", "label": "DONE", "left": "21.6%", "width": "8.3%" },
+      { "name": "Material Delivery", "phase": "05 / MILESTONE", "cls": "complete", "label": "MATERIAL IN", "left": "30%", "width": "0%", "milestone": true },
+      { "name": "First Article Validation", "phase": "06 / COMPLETE", "cls": "complete", "label": "VALIDATED", "left": "30%", "width": "8.3%" },
+      { "name": "Ramp Up / Jump Run", "phase": "07 / ACTIVE NOW", "cls": "active", "label": "IN PROGRESS", "left": "38.3%", "width": "16.6%" },
+      { "name": "Production Run Live", "phase": "08 / MILESTONE", "cls": "future", "label": "PRODUCTION RUN LIVE", "left": "66.6%", "width": "0%", "milestone": true }
+    ]
+  },
+  {
+    "est": "1003",
+    "desc": "Inversion T-Shirt, LS Lightweight",
+    "sku": "MSRT00083",
+    "status": "production",
+    "awaitingFrom": null,
+    "awaitingItem": null,
+    "annualQty": null,
+    "price": 9.20,
+    "updatedAt": "2026-05-10",
+    "schedulePct": 88,
+    "phases": [
+      { "name": "Tech Pack", "phase": "01 / COMPLETE", "cls": "complete", "label": "RECEIVED", "left": "0%", "width": "6.6%" },
+      { "name": "Sample Approval", "phase": "02 / COMPLETE", "cls": "complete", "label": "APPROVED", "left": "6.6%", "width": "8.3%" },
+      { "name": "Quote Submitted", "phase": "03 / COMPLETE", "cls": "complete", "label": "DONE", "left": "15%", "width": "6.6%" },
+      { "name": "Pattern Engineering", "phase": "04 / COMPLETE", "cls": "complete", "label": "DONE", "left": "21.6%", "width": "8.3%" },
+      { "name": "Material Delivery", "phase": "05 / MILESTONE", "cls": "complete", "label": "MATERIAL IN", "left": "30%", "width": "0%", "milestone": true },
+      { "name": "First Article Validation", "phase": "06 / COMPLETE", "cls": "complete", "label": "VALIDATED", "left": "30%", "width": "8.3%" },
+      { "name": "Ramp Up / Jump Run", "phase": "07 / ACTIVE NOW", "cls": "active", "label": "IN PROGRESS", "left": "38.3%", "width": "16.6%" },
+      { "name": "Production Run Live", "phase": "08 / MILESTONE", "cls": "future", "label": "PRODUCTION RUN LIVE", "left": "58.3%", "width": "0%", "milestone": true }
+    ]
+  }
 ]

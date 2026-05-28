@@ -8,10 +8,9 @@ interface SubmitModalProps {
 }
 
 type Org = "massif" | "envision";
-type SubmitState = "idle" | "submitting" | "success" | "error";
+type SubmitState = "idle" | "submitting" | "success";
 
-const RECIPIENT_EMAIL = "mia@envisioninc.example";
-const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const RECIPIENT_EMAIL = "Massif@envisionus.com";
 
 export default function SubmitModal({ open, onClose }: SubmitModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -25,13 +24,11 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [state, setState] = useState<SubmitState>("idle");
-  const [error, setError] = useState<string | null>(null);
 
   // Reset on open
   useEffect(() => {
     if (open) {
       setState("idle");
-      setError(null);
       const t = window.setTimeout(() => firstFieldRef.current?.focus(), 30);
       return () => window.clearTimeout(t);
     }
@@ -49,41 +46,14 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
 
   const valid = name.trim() && email.trim() && subject.trim() && message.trim();
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!valid || state === "submitting") return;
     setState("submitting");
-    setError(null);
 
-    const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
     const subjectLine = est ? `[EST ${est}] ${subject}` : subject;
     const body = `From: ${name} (${email})\nOrg: ${org}\nEST: ${est || "—"}\n\n${message}`;
 
-    if (org === "massif" && web3Key) {
-      try {
-        const res = await fetch(WEB3FORMS_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            access_key: web3Key,
-            from_name: name,
-            replyto: email,
-            subject: subjectLine,
-            message: body,
-          }),
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = (await res.json()) as { success?: boolean; message?: string };
-        if (!data.success) throw new Error(data.message ?? "Submission failed");
-        setState("success");
-      } catch (err) {
-        setState("error");
-        setError(err instanceof Error ? err.message : "Submission failed");
-      }
-      return;
-    }
-
-    // Envision users (or no Web3Forms key configured): open mailto.
     const mailto = `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(
       subjectLine
     )}&body=${encodeURIComponent(body)}`;
@@ -125,9 +95,8 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
             </div>
             <p className="modal-success-title">Update sent</p>
             <p className="modal-success-msg">
-              {org === "massif"
-                ? "Mia at Envision Pricing & Estimating has been notified."
-                : "Your mail client should have opened with the message ready to send."}
+              Your mail client should have opened with the message ready to send
+              to Massif@envisionus.com.
             </p>
             <div className="modal-actions">
               <button type="button" className="action primary" onClick={onClose}>
@@ -138,8 +107,8 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
         ) : (
           <form className="submit-form" onSubmit={handleSubmit} noValidate>
             <p className="form-intro">
-              Routes to Mia at Envision Pricing &amp; Estimating. Massif users
-              submit via secure form; Envision users open in their mail client.
+              Routes to Massif@envisionus.com. Opens in your mail client with the
+              message ready to send.
             </p>
 
             <fieldset className="field-group">
@@ -225,12 +194,6 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
                 required
               />
             </div>
-
-            {state === "error" && (
-              <div className="form-error" role="alert">
-                Couldn&rsquo;t send: {error}
-              </div>
-            )}
 
             <div className="modal-actions">
               <button type="button" className="action" onClick={onClose}>
