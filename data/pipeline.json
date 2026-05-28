@@ -22,10 +22,11 @@
       { "name": "Tech Pack", "phase": "01 / COMPLETE", "cls": "complete", "label": "RECEIVED", "left": "0%", "width": "16.6%" },
       { "name": "Sample Approval", "phase": "02 / COMPLETE", "cls": "complete", "label": "APPROVED", "left": "8.3%", "width": "25%" },
       { "name": "Quote Submitted", "phase": "03 / COMPLETE", "cls": "complete", "label": "DONE", "left": "25%", "width": "8.3%" },
-      { "name": "Pattern Engineering", "phase": "04 / ACTIVE NOW", "cls": "active", "label": "IN PROGRESS", "left": "33.3%", "width": "25%" },
-      { "name": "Material Sourcing", "phase": "05 / PLANNED", "cls": "future", "label": "PLANNED", "left": "50%", "width": "25%" },
-      { "name": "Production Run", "phase": "06 / SEPT-OCT", "cls": "future", "label": "SEPT-OCT", "left": "66.6%", "width": "25%" },
-      { "name": "Delivery Window", "phase": "07 / NOV-DEC", "cls": "future", "label": "NOV-DEC", "left": "83.3%", "width": "16.6%" }
+      { "name": "Pattern Engineering", "phase": "04 / ACTIVE NOW", "cls": "active", "label": "IN PROGRESS", "left": "33.3%", "width": "16.6%" },
+      { "name": "Material Delivery", "phase": "05 / MILESTONE", "cls": "future", "label": "MATERIAL DELIVERY", "left": "50%", "width": "0%", "milestone": true },
+      { "name": "First Article Validation", "phase": "06 / PLANNED", "cls": "future", "label": "PLANNED", "left": "50%", "width": "16.6%" },
+      { "name": "Ramp Up / Jump Run", "phase": "07 / SEPT-OCT", "cls": "future", "label": "SEPT-OCT", "left": "66.6%", "width": "25%" },
+      { "name": "Production Run Live", "phase": "08 / MILESTONE", "cls": "future", "label": "PRODUCTION RUN LIVE", "left": "91.6%", "width": "0%", "milestone": true }
     ]
   },
   { "est": "1054.a", "desc": "Flight Suit Pant Military V2 OCP", "sku": "MPNT00069O", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-05-19" },
