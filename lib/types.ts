@@ -11,6 +11,8 @@ export interface Phase {
   label: string;
   left: string;
   width: string;
+  /** When true, render as a point/diamond milestone marker instead of a bar. */
+  milestone?: boolean;
 }
 
 export interface PipelineLine {
@@ -54,16 +56,18 @@ interface PhaseTemplate {
   phase: string;
   left: string;
   width: string;
+  milestone?: boolean;
 }
 
 const PHASE_TEMPLATES: PhaseTemplate[] = [
   { name: "Tech Pack", phase: "01", left: "0%", width: "16.6%" },
   { name: "Sample Approval", phase: "02", left: "8.3%", width: "25%" },
   { name: "Quote Submitted", phase: "03", left: "25%", width: "8.3%" },
-  { name: "Pattern Engineering", phase: "04", left: "33.3%", width: "25%" },
-  { name: "Material Sourcing", phase: "05", left: "50%", width: "25%" },
-  { name: "Production Run", phase: "06", left: "66.6%", width: "25%" },
-  { name: "Delivery Window", phase: "07", left: "83.3%", width: "16.6%" },
+  { name: "Pattern Engineering", phase: "04", left: "33.3%", width: "16.6%" },
+  { name: "Material Delivery", phase: "05", left: "50%", width: "0%", milestone: true },
+  { name: "First Article Validation", phase: "06", left: "50%", width: "16.6%" },
+  { name: "Ramp Up / Jump Run", phase: "07", left: "66.6%", width: "25%" },
+  { name: "Production Run Live", phase: "08", left: "91.6%", width: "0%", milestone: true },
 ];
 
 const PHASES_COMPLETE_BY_STATUS: Record<PipelineStatus, number> = {
@@ -105,6 +109,7 @@ export function phasesFor(row: PipelineLine): Phase[] {
       label,
       left: t.left,
       width: t.width,
+      milestone: t.milestone,
     };
   });
 }

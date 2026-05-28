@@ -108,9 +108,9 @@ export default function GanttCard({ programs, selected, onSelect }: GanttCardPro
           <div className="gantt-hero-overlay"></div>
           <div className="gantt-hero-content">
             <div className="gantt-hero-left">
-              <div className="gantt-hero-tag">
-                {isPriority ? "FLAGSHIP PROGRAM" : "PROGRAM SCHEDULE"}
-              </div>
+              {!isPriority && (
+                <div className="gantt-hero-tag">PROGRAM SCHEDULE</div>
+              )}
               {isPriority && <span className="priority-tag">Priority Build</span>}
               <h2>{selected.desc}</h2>
               <p className="desc">{qtyText}</p>
@@ -160,18 +160,26 @@ export default function GanttCard({ programs, selected, onSelect }: GanttCardPro
                   {Array.from({ length: 12 }).map((_, i) => (
                     <div key={i} className="month-cell"></div>
                   ))}
-                  <div
-                    className={`gantt-bar ${row.cls}`}
-                    data-label={row.label}
-                    style={{ left: row.left, width: row.width }}
-                  >
-                    {row.cls === "active" && (
-                      <>
-                        <span className="shimmer"></span>
-                        <span className="pulse-dot"></span>
-                      </>
-                    )}
-                  </div>
+                  {row.milestone ? (
+                    <div
+                      className={`gantt-milestone ${row.cls}`}
+                      style={{ left: row.left }}
+                      title={row.name}
+                    ></div>
+                  ) : (
+                    <div
+                      className={`gantt-bar ${row.cls}`}
+                      data-label={row.label}
+                      style={{ left: row.left, width: row.width }}
+                    >
+                      {row.cls === "active" && (
+                        <>
+                          <span className="shimmer"></span>
+                          <span className="pulse-dot"></span>
+                        </>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
