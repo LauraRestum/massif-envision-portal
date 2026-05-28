@@ -24,11 +24,13 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [state, setState] = useState<SubmitState>("idle");
+  const [copied, setCopied] = useState(false);
 
   // Reset on open
   useEffect(() => {
     if (open) {
       setState("idle");
+      setCopied(false);
       const t = window.setTimeout(() => firstFieldRef.current?.focus(), 30);
       return () => window.clearTimeout(t);
     }
@@ -46,19 +48,36 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
 
   const valid = name.trim() && email.trim() && subject.trim() && message.trim();
 
+  const subjectLine = est ? `[EST ${est}] ${subject}` : subject;
+  const body = `From: ${name} (${email})\nOrg: ${org}\nEST: ${est || "—"}\n\n${message}`;
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!valid || state === "submitting") return;
     setState("submitting");
 
-    const subjectLine = est ? `[EST ${est}] ${subject}` : subject;
-    const body = `From: ${name} (${email})\nOrg: ${org}\nEST: ${est || "—"}\n\n${message}`;
-
     const mailto = `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(
       subjectLine
     )}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    // Trigger the mail client without navigating the dashboard away.
+    const link = document.createElement("a");
+    link.href = mailto;
+    link.rel = "noopener";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
     setState("success");
+  }
+
+  async function handleCopy() {
+    const text = `To: ${RECIPIENT_EMAIL}\nSubject: ${subjectLine}\n\n${body}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2500);
+    } catch {
+      setCopied(false);
+    }
   }
 
   return (
@@ -91,16 +110,20 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
         {state === "success" ? (
           <div className="modal-success">
             <div className="modal-success-icon" aria-hidden="true">
-              ✓
+              ✉
             </div>
-            <p className="modal-success-title">Update sent</p>
+            <p className="modal-success-title">Opening your email…</p>
             <p className="modal-success-msg">
-              Your mail client should have opened with the message ready to send
-              to Massif@envisionus.com.
+              Your mail app should open with a message ready to send to{" "}
+              {RECIPIENT_EMAIL}. If nothing opened, copy the message and send it
+              manually.
             </p>
             <div className="modal-actions">
+              <button type="button" className="action" onClick={handleCopy}>
+                {copied ? "Copied ✓" : "Copy message"}
+              </button>
               <button type="button" className="action primary" onClick={onClose}>
-                Close
+                Done
               </button>
             </div>
           </div>
