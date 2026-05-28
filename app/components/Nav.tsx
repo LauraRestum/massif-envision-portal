@@ -16,6 +16,8 @@ export default function Nav({
   return (
     <nav className="nav" aria-label="Primary">
       <div className="nav-brand">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="nav-envision" src="/envision-logo.jpg" alt="Envision" />
         <span className="nav-x" aria-hidden="true">
           x
         </span>
