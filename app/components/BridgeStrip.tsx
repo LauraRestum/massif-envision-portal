@@ -18,7 +18,7 @@ export default function BridgeStrip({ data }: BridgeStripProps) {
       <div className="bridge-stats">
         <div className="bridge-stat">
           <span className="bridge-stat-v">{waitingMassif}</span>
-          <span className="bridge-stat-l">Waiting on Massif</span>
+          <span className="bridge-stat-l">Waiting on <span className="massif-brand">Massif</span></span>
         </div>
         <div className="bridge-stat">
           <span className="bridge-stat-v">{inProgressEnvision}</span>

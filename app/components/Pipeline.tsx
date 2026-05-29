@@ -36,8 +36,8 @@ const STATUS_ORDER: Record<PipelineStatus, number> = {
 
 type GroupKey = "massif" | "envision" | "ready";
 
-const GROUP_LABEL: Record<GroupKey, string> = {
-  massif: "Waiting on Massif",
+const GROUP_LABEL: Record<GroupKey, React.ReactNode> = {
+  massif: <>Waiting on <span className="massif-brand">Massif</span></>,
   envision: "In progress at Envision",
   ready: "Ready to advance",
 };
@@ -452,7 +452,7 @@ function AwaitingChip({
       }`}
     >
       <span className="await-dot" aria-hidden="true" />
-      <span className="await-who">{isMassif ? "Massif" : "Envision"}</span>
+      <span className="await-who">{isMassif ? <span className="massif-brand">Massif</span> : "Envision"}</span>
       <span className="await-sep" aria-hidden="true">
         ·
       </span>
