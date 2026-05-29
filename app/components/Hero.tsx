@@ -7,7 +7,7 @@ export default function Hero() {
       </h1>
       <p>
         Every active opportunity, every program milestone, in one view. Shared
-        between Envision and Massif.
+        between Envision and <span className="massif-brand">Massif</span>.
       </p>
     </section>
   );

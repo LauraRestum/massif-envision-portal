@@ -17,8 +17,8 @@
     --env-charcoal:    #53565A;
     --env-blue-dim:    #1A6FA0;
 
-    --massif-red:      #b23030;
-    --massif-red-dim:  rgba(178,48,48,0.18);
+    --massif-red:      #a51e22;
+    --massif-red-dim:  rgba(165,30,34,0.18);
     --ocp-tan:         #b8a47a;
 
     --bg-body:         #162234;
@@ -29,6 +29,11 @@
     --border-mid:      rgba(255,255,255,0.22);
     --border-dark:     rgba(255,255,255,0.14);
     --border-strong:   rgba(255,255,255,0.35);
+  }
+
+  .massif-brand {
+    color: var(--massif-red);
+    font-weight: inherit;
   }
 
   body {
@@ -146,14 +151,15 @@
   .hero h1 {
     font-size: clamp(2.2rem, 4vw, 3rem);
     font-weight: 800;
-    letter-spacing: -0.025em;
-    line-height: 1.05;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
     margin-bottom: 1rem;
   }
   .hero h1 em {
     font-style: italic;
     font-weight: 800;
     color: var(--env-green);
+    padding-right: 0.05em;
   }
   .hero p {
     font-size: 1.15rem; line-height: 1.7;
@@ -309,14 +315,15 @@
   .gantt-hero h2 {
     font-size: clamp(1.6rem, 2.5vw, 2.1rem);
     font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
     color: #fff;
   }
   .gantt-hero h2 em {
     font-style: italic;
     color: var(--env-green);
     font-weight: 800;
+    padding-right: 0.05em;
   }
   .gantt-hero .desc {
     font-size: 1.05rem;

@@ -130,7 +130,7 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
         ) : (
           <form className="submit-form" onSubmit={handleSubmit} noValidate>
             <p className="form-intro">
-              Routes to Massif@envisionus.com. Opens in your mail client with the
+              Routes to <span className="massif-brand">Massif</span>@envisionus.com. Opens in your mail client with the
               message ready to send.
             </p>
 
@@ -144,7 +144,7 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
                   checked={org === "massif"}
                   onChange={() => setOrg("massif")}
                 />
-                Massif
+                <span className="massif-brand">Massif</span>
               </label>
               <label className={`org-pill ${org === "envision" ? "checked" : ""}`}>
                 <input
