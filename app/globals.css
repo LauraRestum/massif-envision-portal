@@ -351,10 +351,7 @@
     margin-right: 0.5rem;
   }
   .priority-tag::before {
-    content: ''; width: 5px; height: 5px;
-    background: var(--massif-red);
-    border-radius: 50%;
-    box-shadow: 0 0 6px var(--massif-red);
+    display: none;
   }
 
   /* ============================================================
@@ -976,25 +973,8 @@
     transform: translateX(0);
   }
 
-  /* Gantt active bar leading-edge pulse dot (uses .pulse-dot child element) */
   .gantt-bar.active .pulse-dot {
-    position: absolute;
-    right: -4px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--env-green);
-    box-shadow: 0 0 0 0 rgba(120,190,33,0.7);
-    animation: leadPulse 1.6s ease-in-out infinite;
-    z-index: 3;
-    pointer-events: none;
-  }
-  @keyframes leadPulse {
-    0%   { box-shadow: 0 0 0 0 rgba(120,190,33,0.8); }
-    70%  { box-shadow: 0 0 0 14px rgba(120,190,33,0); }
-    100% { box-shadow: 0 0 0 0 rgba(120,190,33,0); }
+    display: none;
   }
 
   /* Filter button micro-interactions */
@@ -1172,69 +1152,19 @@
     opacity: 0 !important;
   }
 
-  /* Rivets — 4 corners of each KPI card */
-  .stat::before {
-    content: '';
-    position: absolute;
-    top: 8px; left: 8px;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #d4bd8e 0%, #a08758 60%, #6e5a35 100%);
-    box-shadow:
-      0 1px 1px rgba(0,0,0,0.4),
-      inset -1px -1px 1px rgba(0,0,0,0.3),
-      inset 1px 1px 1px rgba(255,255,255,0.4);
-    z-index: 5;
-  }
+  .stat::before,
   .stat::after {
-    content: '';
-    position: absolute;
-    bottom: 8px; left: 8px;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #d4bd8e 0%, #a08758 60%, #6e5a35 100%);
-    box-shadow:
-      0 1px 1px rgba(0,0,0,0.4),
-      inset -1px -1px 1px rgba(0,0,0,0.3),
-      inset 1px 1px 1px rgba(255,255,255,0.4);
-    z-index: 5;
+    display: none;
   }
-  /* For top-right and bottom-right rivets, use inset shadows on a separate technique:
-     since we only get ::before and ::after per element, we'll mount the right-side rivets
-     using background-image radial-gradients */
   .stat {
-    background-image:
-      radial-gradient(circle 4px at calc(100% - 11px) 11px,
-        #d4bd8e 0%, #a08758 50%, #6e5a35 80%, transparent 100%),
-      radial-gradient(circle 4px at calc(100% - 11px) calc(100% - 11px),
-        #d4bd8e 0%, #a08758 50%, #6e5a35 80%, transparent 100%),
-      linear-gradient(180deg, #f8f9fc 0%, #eef0f5 100%);
-    background-repeat: no-repeat;
-    background-size: 14px 14px, 14px 14px, 100% 100%;
-    background-position: top right, bottom right, 0 0;
+    background-image: linear-gradient(180deg, #f8f9fc 0%, #eef0f5 100%);
   }
   .stat:hover {
-    background-image:
-      radial-gradient(circle 4px at calc(100% - 11px) 11px,
-        #d4bd8e 0%, #a08758 50%, #6e5a35 80%, transparent 100%),
-      radial-gradient(circle 4px at calc(100% - 11px) calc(100% - 11px),
-        #d4bd8e 0%, #a08758 50%, #6e5a35 80%, transparent 100%),
-      linear-gradient(180deg, #ffffff 0%, #f4f6fa 100%);
-    background-repeat: no-repeat;
-    background-size: 14px 14px, 14px 14px, 100% 100%;
-    background-position: top right, bottom right, 0 0;
+    background-image: linear-gradient(180deg, #ffffff 0%, #f4f6fa 100%);
   }
 
   .stat-feat:hover {
-    background-image:
-      radial-gradient(circle 4px at calc(100% - 11px) 11px,
-        #d4bd8e 0%, #a08758 50%, #6e5a35 80%, transparent 100%),
-      radial-gradient(circle 4px at calc(100% - 11px) calc(100% - 11px),
-        #d4bd8e 0%, #a08758 50%, #6e5a35 80%, transparent 100%),
-      linear-gradient(135deg, #f6fbe9 0%, #e8f5d1 100%);
-    background-repeat: no-repeat;
-    background-size: 14px 14px, 14px 14px, 100% 100%;
-    background-position: top right, bottom right, 0 0;
+    background-image: linear-gradient(135deg, #f6fbe9 0%, #e8f5d1 100%);
   }
 
   /* Tactical bridge strip — between Gantt and Pipeline */
@@ -1586,14 +1516,8 @@
     letter-spacing: 0.1em;
   }
   .pgroup-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 0 8px currentColor;
+    display: none;
   }
-  .pgroup-dot-massif { background: var(--ocp-tan); color: var(--ocp-tan); }
-  .pgroup-dot-envision { background: var(--env-bright-blue); color: var(--env-bright-blue); }
-  .pgroup-dot-ready { background: var(--env-green); color: var(--env-green); }
 
   /* ---------- Awaiting chips ---------- */
   .pcard .await-row-wrap {
@@ -1620,11 +1544,7 @@
     padding: 0.25rem 0.6rem;
   }
   .await-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-    box-shadow: 0 0 6px currentColor;
-    flex-shrink: 0;
+    display: none;
   }
   .await-massif { color: var(--ocp-tan); }
   .await-envision { color: var(--env-bright-blue); }
@@ -1722,11 +1642,7 @@
     white-space: nowrap;
   }
   .status-chip::before {
-    content: '';
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: currentColor;
-    box-shadow: 0 0 3px currentColor;
+    display: none;
   }
   .status-chip.s-pending { color: #6ba9d4; }
   .status-chip.s-quoted { color: var(--env-bright-blue); }
