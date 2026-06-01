@@ -672,13 +672,7 @@
     padding-bottom: 0.4rem !important;
   }
   .pcard .stat::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    background: currentColor;
-    box-shadow: 0 0 3px currentColor;
+    display: none;
   }
   .pcard .stat.pending    { color: #6ba9d4; }
   .pcard .stat.quoted     { color: var(--env-bright-blue); }
