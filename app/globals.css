@@ -234,15 +234,7 @@
     margin-top: 0.75rem;
   }
   .stat-feat {
-    background-image:
-      radial-gradient(circle 4px at calc(100% - 11px) 11px,
-        #d4bd8e 0%, #a08758 50%, #6e5a35 80%, transparent 100%),
-      radial-gradient(circle 4px at calc(100% - 11px) calc(100% - 11px),
-        #d4bd8e 0%, #a08758 50%, #6e5a35 80%, transparent 100%),
-      linear-gradient(135deg, #f0f8e0 0%, #e2f1c8 100%);
-    background-repeat: no-repeat;
-    background-size: 14px 14px, 14px 14px, 100% 100%;
-    background-position: top right, bottom right, 0 0;
+    background-image: linear-gradient(135deg, #f0f8e0 0%, #e2f1c8 100%);
     border-color: rgba(120,190,33,0.55);
     border-top: 3px solid #a08758;
   }
