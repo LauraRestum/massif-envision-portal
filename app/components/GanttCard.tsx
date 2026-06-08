@@ -144,7 +144,7 @@ export default function GanttCard({ programs, selected, onSelect }: GanttCardPro
             <div className="gantt-header">
               <div className="label-col">PHASE</div>
               {MONTHS.map((m) => (
-                <div key={m} className={m === "MAY" ? "now" : undefined}>
+                <div key={m} className={m === "JUN" ? "now" : undefined}>
                   {m}
                 </div>
               ))}
