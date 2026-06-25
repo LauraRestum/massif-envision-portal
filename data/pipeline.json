@@ -98,5 +98,13 @@
       { "name": "Ramp Up / Jump Run", "phase": "07 / ACTIVE NOW", "cls": "active", "label": "IN PROGRESS", "left": "38.3%", "width": "16.6%" },
       { "name": "Production Run Live", "phase": "08 / MILESTONE", "cls": "future", "label": "PRODUCTION RUN LIVE", "left": "58.3%", "width": "0%", "milestone": true }
     ]
-  }
+  },
+  { "est": "1056", "desc": "Flamestretch Pant", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
+  { "est": "1057", "desc": "Flamestretch Pullover", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
+  { "est": "1058", "desc": "Flamestretch Uni", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
+  { "est": "1059", "desc": "Hotjohns Bottom", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
+  { "est": "1060", "desc": "Hotjohns Crew", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
+  { "est": "1061", "desc": "Cool Knit Bottom", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
+  { "est": "1062", "desc": "Cool Knit Crew", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
+  { "est": "1063", "desc": "Cool Knit Tee", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" }
 ]
