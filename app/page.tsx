@@ -5,6 +5,8 @@ import pipelineData from "@/data/pipeline.json";
 import {
   formatNavDate,
   latestUpdate,
+  matchesAwaitFilter,
+  type AwaitFilterKey,
   type PipelineLine,
   type PipelineStatus,
 } from "@/lib/types";
@@ -39,6 +41,12 @@ const VALID_FILTERS: FilterKey[] = [
   "accepted",
   "production",
 ];
+const VALID_AWAIT_FILTERS: AwaitFilterKey[] = [
+  "all",
+  "massif",
+  "envision",
+  "ready",
+];
 const VALID_VIEWS: ViewMode[] = ["cards", "table"];
 const VALID_SORT_KEYS: SortKey[] = [
   "est",
@@ -51,6 +59,7 @@ const VALID_SORT_KEYS: SortKey[] = [
 
 function readParams(): {
   filter: FilterKey;
+  awaitFilter: AwaitFilterKey;
   query: string;
   view: ViewMode;
   sortKey: SortKey;
@@ -60,6 +69,7 @@ function readParams(): {
   if (typeof window === "undefined") {
     return {
       filter: "all",
+      awaitFilter: "all",
       query: "",
       view: "cards",
       sortKey: "est",
@@ -69,6 +79,7 @@ function readParams(): {
   }
   const p = new URLSearchParams(window.location.search);
   const filter = p.get("filter") as FilterKey | null;
+  const awaitFilter = p.get("await") as AwaitFilterKey | null;
   const view = p.get("view") as ViewMode | null;
   const sortKey = p.get("sort") as SortKey | null;
   const sortDir = p.get("dir") as SortDir | null;
@@ -76,6 +87,10 @@ function readParams(): {
   const programValid = program && DATA.some((r) => r.est === program);
   return {
     filter: filter && VALID_FILTERS.includes(filter) ? filter : "all",
+    awaitFilter:
+      awaitFilter && VALID_AWAIT_FILTERS.includes(awaitFilter)
+        ? awaitFilter
+        : "all",
     query: p.get("q") ?? "",
     view: view && VALID_VIEWS.includes(view) ? view : "cards",
     sortKey: sortKey && VALID_SORT_KEYS.includes(sortKey) ? sortKey : "est",
@@ -86,6 +101,7 @@ function readParams(): {
 
 export default function Page() {
   const [filter, setFilter] = useState<FilterKey>("all");
+  const [awaitFilter, setAwaitFilter] = useState<AwaitFilterKey>("all");
   const [query, setQuery] = useState("");
   const [view, setView] = useState<ViewMode>("cards");
   const [sortKey, setSortKey] = useState<SortKey>("est");
@@ -97,6 +113,7 @@ export default function Page() {
   useEffect(() => {
     const p = readParams();
     setFilter(p.filter);
+    setAwaitFilter(p.awaitFilter);
     setQuery(p.query);
     setView(p.view);
     setSortKey(p.sortKey);
@@ -109,6 +126,7 @@ export default function Page() {
     if (!hydrated) return;
     const p = new URLSearchParams();
     if (filter !== "all") p.set("filter", filter);
+    if (awaitFilter !== "all") p.set("await", awaitFilter);
     if (query) p.set("q", query);
     if (view !== "cards") p.set("view", view);
     if (sortKey !== "est") p.set("sort", sortKey);
@@ -117,16 +135,17 @@ export default function Page() {
     const qs = p.toString();
     const url = qs ? `?${qs}` : window.location.pathname;
     window.history.replaceState(null, "", url);
-  }, [filter, query, view, sortKey, sortDir, program, hydrated]);
+  }, [filter, awaitFilter, query, view, sortKey, sortDir, program, hydrated]);
 
   const liveCount = useMemo(() => {
     const q = query.toLowerCase().trim();
     return DATA.filter((r) => {
       if (filter !== "all" && r.status !== filter) return false;
+      if (!matchesAwaitFilter(r, awaitFilter)) return false;
       if (!q) return true;
       return (r.est + " " + r.desc + " " + r.sku).toLowerCase().includes(q);
     }).length;
-  }, [filter, query]);
+  }, [filter, awaitFilter, query]);
 
   const lastUpdate = useMemo(() => {
     const iso = latestUpdate(DATA);
@@ -178,11 +197,17 @@ export default function Page() {
         selected={selectedProgram}
         onSelect={setProgram}
       />
-      <BridgeStrip data={DATA} />
+      <BridgeStrip
+        data={DATA}
+        awaitFilter={awaitFilter}
+        onAwaitFilterChange={setAwaitFilter}
+      />
       <Pipeline
         data={DATA}
         filter={filter}
         onFilterChange={setFilter}
+        awaitFilter={awaitFilter}
+        onAwaitFilterChange={setAwaitFilter}
         query={query}
         onClearSearch={() => setQuery("")}
         view={view}
