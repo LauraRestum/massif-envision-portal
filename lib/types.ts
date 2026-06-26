@@ -2,6 +2,26 @@ export type PipelineStatus = "pending" | "quoted" | "accepted" | "production";
 
 export type AwaitingFrom = "massif" | "envision" | null;
 
+/** Filter dimension keyed off `awaitingFrom`. "all" applies no constraint. */
+export type AwaitFilterKey = "all" | "massif" | "envision" | "ready";
+
+/** True if a line satisfies the given awaiting-stage filter. */
+export function matchesAwaitFilter(
+  row: PipelineLine,
+  f: AwaitFilterKey
+): boolean {
+  switch (f) {
+    case "massif":
+      return row.awaitingFrom === "massif";
+    case "envision":
+      return row.awaitingFrom === "envision";
+    case "ready":
+      return row.awaitingFrom === null;
+    default:
+      return true;
+  }
+}
+
 export type PhaseClass = "complete" | "active" | "future";
 
 export interface Phase {

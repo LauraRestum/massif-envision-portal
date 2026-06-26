@@ -2,14 +2,22 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  AwaitFilterKey,
   PipelineLine,
   PipelineStatus,
   STATUS_LABEL,
   isVariant,
+  matchesAwaitFilter,
   parentEstOf,
 } from "@/lib/types";
 
 type FilterKey = "all" | PipelineStatus;
+
+const AWAIT_FILTER_LABEL: Record<Exclude<AwaitFilterKey, "all">, string> = {
+  massif: "Waiting on Massif",
+  envision: "In progress at Envision",
+  ready: "Ready to advance",
+};
 export type ViewMode = "cards" | "table";
 export type SortKey = "est" | "desc" | "status" | "awaiting" | "qty" | "price";
 export type SortDir = "asc" | "desc";
@@ -18,6 +26,8 @@ interface PipelineProps {
   data: PipelineLine[];
   filter: FilterKey;
   onFilterChange: (f: FilterKey) => void;
+  awaitFilter: AwaitFilterKey;
+  onAwaitFilterChange: (f: AwaitFilterKey) => void;
   query: string;
   onClearSearch: () => void;
   view: ViewMode;
@@ -86,6 +96,8 @@ export default function Pipeline({
   data,
   filter,
   onFilterChange,
+  awaitFilter,
+  onAwaitFilterChange,
   query,
   onClearSearch,
   view,
@@ -100,10 +112,11 @@ export default function Pipeline({
     const q = query.toLowerCase().trim();
     return data.filter((r) => {
       if (filter !== "all" && r.status !== filter) return false;
+      if (!matchesAwaitFilter(r, awaitFilter)) return false;
       if (!q) return true;
       return (r.est + " " + r.desc + " " + r.sku).toLowerCase().includes(q);
     });
-  }, [data, filter, query]);
+  }, [data, filter, awaitFilter, query]);
 
   const nestedAll = useMemo(() => nestVariants(filtered), [filtered]);
 
@@ -216,6 +229,16 @@ export default function Pipeline({
               aria-label="Clear status filter"
             >
               ✕ {filter} filter
+            </button>
+          )}
+          {awaitFilter !== "all" && (
+            <button
+              type="button"
+              className="fbtn fbtn-reset"
+              onClick={() => onAwaitFilterChange("all")}
+              aria-label="Clear stage filter"
+            >
+              ✕ {AWAIT_FILTER_LABEL[awaitFilter]}
             </button>
           )}
           <div
