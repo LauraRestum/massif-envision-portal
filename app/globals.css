@@ -556,6 +556,8 @@
     margin: 0 auto;
     padding: 0 3rem 4rem;
     position: relative; z-index: 2;
+    /* Breathing room when jumped to via the KPI / stage filters or skip link. */
+    scroll-margin-top: 1.5rem;
   }
   .pipeline-head {
     display: flex;
