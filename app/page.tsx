@@ -179,6 +179,41 @@ export default function Page() {
     setSortDir(d);
   }, []);
 
+  /** Smoothly bring the pipeline section into view (respects reduced motion). */
+  const scrollToPipeline = useCallback(() => {
+    if (typeof document === "undefined") return;
+    const target = document.getElementById("pipeline");
+    if (!target) return;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    target.scrollIntoView({
+      behavior: reduce ? "auto" : "smooth",
+      block: "start",
+    });
+  }, []);
+
+  /**
+   * Set the status filter from the KPI squares, then jump to the pipeline.
+   * Clicking the active square again clears the filter without scrolling.
+   */
+  const handleKpiFilter = useCallback(
+    (f: FilterKey) => {
+      setFilter(f);
+      if (f !== "all") scrollToPipeline();
+    },
+    [scrollToPipeline]
+  );
+
+  /** Same behavior for the stage (bridge) filters, which sit just above the list. */
+  const handleBridgeFilter = useCallback(
+    (f: AwaitFilterKey) => {
+      setAwaitFilter(f);
+      if (f !== "all") scrollToPipeline();
+    },
+    [scrollToPipeline]
+  );
+
   return (
     <>
       <a href="#pipeline" className="skip-link">
@@ -191,7 +226,7 @@ export default function Page() {
         lastUpdate={lastUpdate}
       />
       <Hero />
-      <KpiStats data={DATA} filter={filter} onFilterChange={setFilter} />
+      <KpiStats data={DATA} filter={filter} onFilterChange={handleKpiFilter} />
       <GanttCard
         programs={ganttPrograms}
         selected={selectedProgram}
@@ -200,7 +235,7 @@ export default function Page() {
       <BridgeStrip
         data={DATA}
         awaitFilter={awaitFilter}
-        onAwaitFilterChange={setAwaitFilter}
+        onAwaitFilterChange={handleBridgeFilter}
       />
       <Pipeline
         data={DATA}
