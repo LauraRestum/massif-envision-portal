@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
     <section className="hero">
-      <div className="hero-eyebrow">PROGRAM OPERATIONS // 2026.06.25</div>
+      <div className="hero-eyebrow">PROGRAM OPERATIONS // 2026.06.26</div>
       <h1>
         Pipeline at <em>a glance</em>
       </h1>
