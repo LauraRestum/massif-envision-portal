@@ -3,7 +3,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   /* Scale the whole page down so content reads less zoomed-in */
-  html { font-size: 87.5%; }
+  html { font-size: 81.25%; }
 
   /* ============================================================
      COLOR SYSTEM — strict Envision corporate palette + Massif red
