@@ -1,11 +1,11 @@
 [
-  { "est": "1047", "desc": "Inversion Bottom, Women's Lightweight", "sku": "MPNT00105", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 245, "price": 15.09, "updatedAt": "2026-05-12" },
-  { "est": "1048", "desc": "Inversion Crew, Women's Lightweight", "sku": "MSRT00086", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 275, "price": 11.74, "updatedAt": "2026-05-12" },
-  { "est": "1049", "desc": "Inversion T-Shirt, Women's Lightweight", "sku": "MSRT00085", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 230, "price": 8.76, "updatedAt": "2026-05-12" },
-  { "est": "1050", "desc": "Inversion Crew, Men's Midweight", "sku": "MSRT00084", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 1250, "price": 13.48, "updatedAt": "2026-05-15" },
-  { "est": "1051", "desc": "Inversion Bottom, Men's Midweight", "sku": "MPNT00104", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 1250, "price": 14.00, "updatedAt": "2026-05-15" },
-  { "est": "1052", "desc": "PCU Level 2 Pullover", "sku": "MSRT00025", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 2500, "price": 17.37, "updatedAt": "2026-05-18" },
-  { "est": "1053", "desc": "PCU Level 2 Pant", "sku": "MPNT00030", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 1500, "price": 10.86, "updatedAt": "2026-05-18" },
+  { "est": "1047", "desc": "Inversion Bottom, Women's Lightweight", "sku": "MPNT00105", "status": "accepted", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 245, "price": 15.09, "updatedAt": "2026-06-26" },
+  { "est": "1048", "desc": "Inversion Crew, Women's Lightweight", "sku": "MSRT00086", "status": "accepted", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 275, "price": 11.74, "updatedAt": "2026-06-26" },
+  { "est": "1049", "desc": "Inversion T-Shirt, Women's Lightweight", "sku": "MSRT00085", "status": "accepted", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 230, "price": 8.76, "updatedAt": "2026-06-26" },
+  { "est": "1050", "desc": "Inversion Crew, Men's Midweight", "sku": "MSRT00084", "status": "accepted", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 1250, "price": 13.48, "updatedAt": "2026-06-26" },
+  { "est": "1051", "desc": "Inversion Bottom, Men's Midweight", "sku": "MPNT00104", "status": "accepted", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 1250, "price": 14.00, "updatedAt": "2026-06-26" },
+  { "est": "1052", "desc": "PCU Level 2 Pullover", "sku": "MSRT00025", "status": "accepted", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 2500, "price": 17.37, "updatedAt": "2026-06-26" },
+  { "est": "1053", "desc": "PCU Level 2 Pant", "sku": "MPNT00030", "status": "accepted", "awaitingFrom": "massif", "awaitingItem": "Pattern", "annualQty": 1500, "price": 10.86, "updatedAt": "2026-06-26" },
   {
     "est": "1054",
     "desc": "Flight Suit Pant Military V1",
@@ -99,12 +99,12 @@
       { "name": "Production Run Live", "phase": "08 / MILESTONE", "cls": "future", "label": "PRODUCTION RUN LIVE", "left": "58.3%", "width": "0%", "milestone": true }
     ]
   },
-  { "est": "1056", "desc": "Flamestretch Pant", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
-  { "est": "1057", "desc": "Flamestretch Pullover", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
-  { "est": "1058", "desc": "Flamestretch Uni", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
-  { "est": "1059", "desc": "Hotjohns Bottom", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
-  { "est": "1060", "desc": "Hotjohns Crew", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
-  { "est": "1061", "desc": "Cool Knit Bottom", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
-  { "est": "1062", "desc": "Cool Knit Crew", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" },
-  { "est": "1063", "desc": "Cool Knit Tee", "sku": "", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-25" }
+  { "est": "1056", "desc": "Flamestretch Pant", "sku": "MPNT00004", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-26" },
+  { "est": "1057", "desc": "Flamestretch Pullover", "sku": "MSRT0005", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-26" },
+  { "est": "1058", "desc": "Flamestretch Uni", "sku": "MOPC00001", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-26" },
+  { "est": "1059", "desc": "Hotjohns Bottom", "sku": "MPNT00005", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-26" },
+  { "est": "1060", "desc": "Hotjohns Crew", "sku": "MSRT00003", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-26" },
+  { "est": "1061", "desc": "Cool Knit Bottom", "sku": "MPNT00009", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-26" },
+  { "est": "1062", "desc": "Cool Knit Crew", "sku": "MSRT00010", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-26" },
+  { "est": "1063", "desc": "Cool Knit Tee", "sku": "MSRT00009", "status": "pending", "awaitingFrom": "massif", "awaitingItem": "Sample", "annualQty": null, "price": null, "updatedAt": "2026-06-26" }
 ]
