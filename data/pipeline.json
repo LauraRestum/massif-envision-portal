@@ -1,11 +1,11 @@
 [
-  { "est": "1047", "desc": "Inversion Bottom, Women's Lightweight", "sku": "MPNT00105", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 245, "price": 15.09, "updatedAt": "2026-08-03" },
-  { "est": "1048", "desc": "Inversion Crew, Women's Lightweight", "sku": "MSRT00086", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 275, "price": 11.74, "updatedAt": "2026-08-03" },
-  { "est": "1049", "desc": "Inversion T-Shirt, Women's Lightweight", "sku": "MSRT00085", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 230, "price": 8.76, "updatedAt": "2026-08-03" },
-  { "est": "1050", "desc": "Inversion Crew, Men's Midweight", "sku": "MSRT00084", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 1250, "price": 13.48, "updatedAt": "2026-08-03" },
-  { "est": "1051", "desc": "Inversion Bottom, Men's Midweight", "sku": "MPNT00104", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 1250, "price": 14.00, "updatedAt": "2026-08-03" },
-  { "est": "1052", "desc": "PCU Level 2 Pullover", "sku": "MSRT00025", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 2500, "price": 17.37, "updatedAt": "2026-08-03" },
-  { "est": "1053", "desc": "PCU Level 2 Pant", "sku": "MPNT00030", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 1500, "price": 10.86, "updatedAt": "2026-08-03" },
+  { "est": "1047", "desc": "Inversion Bottom, Women's Lightweight", "sku": "MPNT00105", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 245, "price": 15.09, "updatedAt": "2026-08-05" },
+  { "est": "1048", "desc": "Inversion Crew, Women's Lightweight", "sku": "MSRT00086", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 275, "price": 11.74, "updatedAt": "2026-08-05" },
+  { "est": "1049", "desc": "Inversion T-Shirt, Women's Lightweight", "sku": "MSRT00085", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 230, "price": 8.76, "updatedAt": "2026-08-05" },
+  { "est": "1050", "desc": "Inversion Crew, Men's Midweight", "sku": "MSRT00084", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 1250, "price": 13.48, "updatedAt": "2026-08-05" },
+  { "est": "1051", "desc": "Inversion Bottom, Men's Midweight", "sku": "MPNT00104", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 1250, "price": 14.00, "updatedAt": "2026-08-05" },
+  { "est": "1052", "desc": "PCU Level 2 Pullover", "sku": "MSRT00025", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 2500, "price": 17.37, "updatedAt": "2026-08-05" },
+  { "est": "1053", "desc": "PCU Level 2 Pant", "sku": "MPNT00030", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": 1500, "price": 10.86, "updatedAt": "2026-08-05" },
   {
     "est": "1054",
     "desc": "Flight Suit Pant Military V1",
@@ -16,7 +16,7 @@
     "annualQty": 13000,
     "price": 77.13,
     "priority": true,
-    "updatedAt": "2026-08-03",
+    "updatedAt": "2026-08-05",
     "schedulePct": 50,
     "phases": [
       { "name": "Tech Pack", "phase": "01 / COMPLETE", "cls": "complete", "label": "RECEIVED", "left": "0%", "width": "16.6%" },
@@ -41,7 +41,7 @@
     "awaitingItem": null,
     "annualQty": 4500,
     "price": 15.77,
-    "updatedAt": "2026-08-03",
+    "updatedAt": "2026-08-05",
     "schedulePct": 50,
     "phases": [
       { "name": "Tech Pack", "phase": "01 / COMPLETE", "cls": "complete", "label": "RECEIVED", "left": "0%", "width": "8.3%" },
@@ -54,17 +54,17 @@
       { "name": "Production Run Live", "phase": "08 / MILESTONE", "cls": "future", "label": "PRODUCTION RUN LIVE", "left": "91.6%", "width": "0%", "milestone": true }
     ]
   },
-  { "est": "1014", "desc": "Advanced Quarter Zip Combat Shirt", "sku": "MCMS000320", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": null, "price": 43.87, "updatedAt": "2026-08-03" },
+  { "est": "1014", "desc": "Advanced Quarter Zip Combat Shirt", "sku": "MCMS000320", "status": "accepted", "awaitingFrom": null, "awaitingItem": null, "annualQty": null, "price": 43.87, "updatedAt": "2026-08-05" },
   {
     "est": "1002",
     "desc": "Inversion T-Shirt, SS Lightweight",
     "sku": "MSRT00082",
     "status": "production",
-    "awaitingFrom": "massif",
-    "awaitingItem": "Pricing Approval",
+    "awaitingFrom": "envision",
+    "awaitingItem": "New Pricing",
     "annualQty": null,
-    "price": 7.98,
-    "updatedAt": "2026-08-03",
+    "price": 7.25,
+    "updatedAt": "2026-08-05",
     "schedulePct": 84,
     "phases": [
       { "name": "Tech Pack", "phase": "01 / COMPLETE", "cls": "complete", "label": "RECEIVED", "left": "0%", "width": "6.6%" },
@@ -82,11 +82,11 @@
     "desc": "Inversion T-Shirt, LS Lightweight",
     "sku": "MSRT00083",
     "status": "production",
-    "awaitingFrom": "massif",
-    "awaitingItem": "Pricing Approval",
+    "awaitingFrom": "envision",
+    "awaitingItem": "New Pricing",
     "annualQty": null,
-    "price": 9.93,
-    "updatedAt": "2026-08-03",
+    "price": 9.20,
+    "updatedAt": "2026-08-05",
     "schedulePct": 88,
     "phases": [
       { "name": "Tech Pack", "phase": "01 / COMPLETE", "cls": "complete", "label": "RECEIVED", "left": "0%", "width": "6.6%" },
@@ -99,12 +99,12 @@
       { "name": "Production Run Live", "phase": "08 / MILESTONE", "cls": "future", "label": "PRODUCTION RUN LIVE", "left": "58.3%", "width": "0%", "milestone": true }
     ]
   },
-  { "est": "1056", "desc": "Flamestretch Pant", "sku": "MPNT00004", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 1350, "price": null, "updatedAt": "2026-08-03" },
-  { "est": "1057", "desc": "Flamestretch Pullover", "sku": "MSRT0005", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 2750, "price": null, "updatedAt": "2026-08-03" },
-  { "est": "1058", "desc": "Flamestretch Uni", "sku": "MOPC00001", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 1000, "price": null, "updatedAt": "2026-08-03" },
-  { "est": "1059", "desc": "Hotjohns Bottom", "sku": "MPNT00005", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 3850, "price": null, "updatedAt": "2026-08-03" },
-  { "est": "1060", "desc": "Hotjohns Crew", "sku": "MSRT00003", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 5100, "price": null, "updatedAt": "2026-08-03" },
-  { "est": "1061", "desc": "Cool Knit Bottom", "sku": "MPNT00009", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 1800, "price": null, "updatedAt": "2026-08-03" },
-  { "est": "1062", "desc": "Cool Knit Crew", "sku": "MSRT00010", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 2250, "price": null, "updatedAt": "2026-08-03" },
-  { "est": "1063", "desc": "Cool Knit Tee", "sku": "MSRT00009", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 2000, "price": null, "updatedAt": "2026-08-03" }
+  { "est": "1056", "desc": "Flamestretch Pant", "sku": "MPNT00004", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 1350, "price": null, "updatedAt": "2026-08-05" },
+  { "est": "1057", "desc": "Flamestretch Pullover", "sku": "MSRT0005", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 2750, "price": null, "updatedAt": "2026-08-05" },
+  { "est": "1058", "desc": "Flamestretch Uni", "sku": "MOPC00001", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 1000, "price": null, "updatedAt": "2026-08-05" },
+  { "est": "1059", "desc": "Hotjohns Bottom", "sku": "MPNT00005", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 3850, "price": null, "updatedAt": "2026-08-05" },
+  { "est": "1060", "desc": "Hotjohns Crew", "sku": "MSRT00003", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 5100, "price": null, "updatedAt": "2026-08-05" },
+  { "est": "1061", "desc": "Cool Knit Bottom", "sku": "MPNT00009", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 1800, "price": null, "updatedAt": "2026-08-05" },
+  { "est": "1062", "desc": "Cool Knit Crew", "sku": "MSRT00010", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 2250, "price": null, "updatedAt": "2026-08-05" },
+  { "est": "1063", "desc": "Cool Knit Tee", "sku": "MSRT00009", "status": "pending", "awaitingFrom": "envision", "awaitingItem": "Price Estimate", "annualQty": 2000, "price": null, "updatedAt": "2026-08-05" }
 ]
