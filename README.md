@@ -30,7 +30,7 @@ app/
 ├── globals.css             # Full design system (lifted from original draft)
 └── components/             # Nav, Hero, KpiStats, GanttCard, Pipeline, etc.
 data/
-└── pipeline.json           # 15-row pipeline data; edit directly to update
+└── pipeline.json           # Pipeline line data; edit directly to update
 lib/
 └── types.ts                # PipelineLine, PipelineStatus, STATUS_LABEL
 ```
