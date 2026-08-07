@@ -2029,3 +2029,270 @@
     .field-row .field-est { max-width: none; }
     .gantt-select { min-width: 100%; }
   }
+
+  /* ============================================================
+     LIVE UPDATE TICKER — rolling program feed under the nav
+     ============================================================ */
+  .ticker {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0;
+    background: rgba(0,8,19,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1.5px solid var(--border-dark);
+    position: relative;
+    z-index: 9;
+    overflow: hidden;
+  }
+  /* Hairline of Envision green along the top edge, tying the bar to the nav. */
+  .ticker::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right,
+      transparent,
+      rgba(120,190,33,0.55) 12%,
+      rgba(120,190,33,0.18) 55%,
+      transparent);
+    pointer-events: none;
+  }
+
+  /* ---------- LIVE flag ---------- */
+  .ticker-flag {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 1.4rem 0 3rem;
+    height: 100%;
+    border-right: 1px solid var(--border-dark);
+    background: linear-gradient(to right, rgba(120,190,33,0.10), transparent);
+    white-space: nowrap;
+  }
+  .ticker-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--env-green);
+    box-shadow: 0 0 0 0 rgba(120,190,33,0.6);
+    animation: tickerPulse 2.4s ease-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes tickerPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(120,190,33,0.55); opacity: 1; }
+    70%  { box-shadow: 0 0 0 7px rgba(120,190,33,0); opacity: 0.75; }
+    100% { box-shadow: 0 0 0 0 rgba(120,190,33,0); opacity: 1; }
+  }
+  .ticker-flag-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--env-green);
+  }
+  .ticker-flag-sub {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  /* ---------- Rolling track ---------- */
+  .ticker-viewport {
+    overflow: hidden;
+    min-width: 0;
+    /* Soft edges without painting an opaque gradient over the glass. */
+    mask-image: linear-gradient(to right, transparent, #000 2.5rem,
+                #000 calc(100% - 2.5rem), transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 2.5rem,
+                #000 calc(100% - 2.5rem), transparent);
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: tickerRoll var(--ticker-duration, 90s) linear infinite;
+  }
+  @keyframes tickerRoll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  /* Pause on hover, on keyboard focus, and on the explicit control. */
+  .ticker:hover .ticker-track,
+  .ticker:focus-within .ticker-track,
+  .ticker[data-paused="true"] .ticker-track {
+    animation-play-state: paused;
+  }
+  /* Keyboard focus drops the roll entirely and leaves a single static run.
+     The browser then scrolls the focused item into view inside the viewport,
+     so tabbing never strands focus half-clipped behind the edge fade. */
+  .ticker:focus-within .ticker-track {
+    animation: none;
+    width: 100%;
+  }
+  .ticker:focus-within .ticker-run[aria-hidden="true"] { display: none; }
+  .ticker:focus-within .ticker-viewport {
+    mask-image: none;
+    -webkit-mask-image: none;
+    scroll-padding-inline: 2.5rem;
+  }
+  .ticker-run {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .ticker-li {
+    display: flex;
+    align-items: center;
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    /* Sets the bar height. Keeps the 44px pause control clear of the top
+       hairline and the bottom border rather than flush against them. */
+    padding: 1.05rem 0;
+    background: none;
+    border: 0;
+    font-family: inherit;
+    text-align: left;
+    white-space: nowrap;
+    color: inherit;
+  }
+  .ticker-item.is-link { cursor: pointer; }
+  .ticker-kind {
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--env-green);
+  }
+  .ticker-time {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .ticker-est {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--env-green);
+    border: 1px solid rgba(120,190,33,0.4);
+    border-radius: 2px;
+    padding: 0.12rem 0.42rem;
+  }
+  .ticker-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+  .ticker-source {
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text-faint);
+  }
+  .ticker-sep {
+    color: var(--ocp-tan);
+    opacity: 0.55;
+    font-size: 0.5rem;
+    padding: 0 1.5rem;
+  }
+  /* Hover and focus land on the headline, so the affordance is not color alone. */
+  .ticker-item.is-link:hover .ticker-text,
+  .ticker-item.is-link:focus-visible .ticker-text {
+    color: var(--text-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--env-green);
+  }
+  .ticker-item.is-link:hover .ticker-est,
+  .ticker-item.is-link:focus-visible .ticker-est {
+    border-color: var(--env-green);
+    background: rgba(120,190,33,0.14);
+  }
+
+  /* ---------- Freshness + pause control ---------- */
+  .ticker-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 3rem 0 1.4rem;
+    height: 100%;
+    border-left: 1px solid var(--border-dark);
+    white-space: nowrap;
+  }
+  .ticker-fresh {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .ticker-fresh-label { color: var(--text-faint); }
+  .ticker-fresh-value {
+    color: var(--env-green);
+    font-variant-numeric: tabular-nums;
+  }
+  .ticker-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    background: none;
+    border: 1px solid var(--border-dark);
+    border-radius: 3px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.18s, border-color 0.18s;
+  }
+  .ticker-toggle:hover,
+  .ticker-toggle:focus-visible {
+    color: var(--env-green);
+    border-color: var(--env-green);
+  }
+  .ticker-toggle-glyph {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+
+  /* ---------- Narrow screens ---------- */
+  @media (max-width: 1100px) {
+    .ticker-flag { padding-left: 1.5rem; }
+    .ticker-meta { padding-right: 1.5rem; }
+    .ticker-flag-sub { display: none; }
+  }
+  @media (max-width: 780px) {
+    .ticker-fresh-label { display: none; }
+    .ticker-source { display: none; }
+  }
+  @media (max-width: 560px) {
+    .ticker-fresh { display: none; }
+    .ticker-meta { padding: 0 0.75rem; }
+    .ticker-flag { padding: 0 0.9rem; }
+    .ticker-sep { padding: 0 1rem; }
+  }
+
+  /* ---------- Motion safety ----------
+     Reduced motion turns the ticker into a plain scrollable list: the
+     duplicate run is removed, the pulse and roll stop, and the pause
+     control goes away because there is no longer anything to pause. */
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none !important;
+      width: 100%;
+    }
+    .ticker-run[aria-hidden="true"] { display: none; }
+    .ticker-viewport {
+      overflow-x: auto;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+    .ticker-dot { animation: none !important; }
+    .ticker-toggle { display: none; }
+  }
