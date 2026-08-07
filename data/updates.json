@@ -1,0 +1,70 @@
+[
+  {
+    "id": "2026-08-07-1002-1003-pricing-accepted",
+    "at": "2026-08-07T15:03",
+    "kind": "Pricing",
+    "est": ["1002", "1003"],
+    "headline": "New pricing accepted by Massif — EST 1002 at $7.98, EST 1003 at $9.93",
+    "source": "Mia Montgomery"
+  },
+  {
+    "id": "2026-08-07-1002-1003-volume",
+    "at": "2026-08-07T15:03",
+    "kind": "Volume",
+    "est": ["1002", "1003"],
+    "headline": "Annual quantity set to 30,000 units on SKUs MSRT00082 and MSRT00083",
+    "source": "Mia Montgomery"
+  },
+  {
+    "id": "2026-08-07-1002-1003-pattern",
+    "at": "2026-08-07T15:03",
+    "kind": "Schedule",
+    "est": ["1002", "1003"],
+    "headline": "Updated Inversion T-Shirt pattern is in production",
+    "source": "Mia Montgomery"
+  },
+  {
+    "id": "2026-08-05-sheet-reconcile",
+    "at": "2026-08-05",
+    "kind": "Sync",
+    "headline": "All 23 active lines reconciled against Massif's 08/05 program sheet",
+    "source": "Mia Montgomery"
+  },
+  {
+    "id": "2026-08-03-1002-1003-pricing-sent",
+    "at": "2026-08-03",
+    "kind": "Pricing",
+    "est": ["1002", "1003"],
+    "headline": "Revised pricing sent to Massif for EST 1002 and EST 1003",
+    "source": "Envision"
+  },
+  {
+    "id": "2026-08-03-patterns-received",
+    "at": "2026-08-03",
+    "kind": "Schedule",
+    "headline": "Patterns received from Massif on EST 1037, 1047-1053 and 1054 — nine lines cleared to advance",
+    "source": "Massif"
+  },
+  {
+    "id": "2026-08-03-1014-accepted",
+    "at": "2026-08-03",
+    "kind": "Status",
+    "est": ["1014"],
+    "headline": "Quote accepted on the Advanced Quarter Zip Combat Shirt at $43.87",
+    "source": "Massif"
+  },
+  {
+    "id": "2026-08-03-estimate-volumes",
+    "at": "2026-08-03",
+    "kind": "Volume",
+    "headline": "Annual quantities added to the eight Flamestretch, Hotjohns and Cool Knit lines",
+    "source": "Mia Montgomery"
+  },
+  {
+    "id": "2026-06-25-new-lines",
+    "at": "2026-06-25",
+    "kind": "New Lines",
+    "headline": "Eight Flamestretch, Hotjohns and Cool Knit lines added to the pipeline",
+    "source": "Mia Montgomery"
+  }
+]
