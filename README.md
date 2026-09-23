@@ -40,6 +40,11 @@ lib/
 Update `data/pipeline.json` and commit. The dashboard re-renders automatically
 on next build. Each row matches the `PipelineLine` type in `lib/types.ts`.
 
+A line's Gantt schedule is derived from its `status` unless the row carries an
+explicit `phases` array. Two lighter-weight overrides also exist: `phasesComplete`
+sets how many leading phases are done, and `timelineTbd: true` shows every phase
+after those as "Timeline TBD" instead of a planned bar.
+
 ## Submit Update modal
 
 Currently a UI placeholder. When ready to wire submissions, replace the modal
