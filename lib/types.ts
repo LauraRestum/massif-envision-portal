@@ -33,6 +33,8 @@ export interface Phase {
   width: string;
   /** When true, render as a point/diamond milestone marker instead of a bar. */
   milestone?: boolean;
+  /** When true, the phase has no dates yet: rendered as a "TBD" note, not a bar. */
+  tbd?: boolean;
 }
 
 export interface PipelineLine {
@@ -48,6 +50,16 @@ export interface PipelineLine {
   updatedAt?: string;
   /** Optional hand-crafted schedule. If omitted, derived from status. */
   phases?: Phase[];
+  /**
+   * Number of leading phases already complete, when deriving the schedule
+   * from status would under-count (e.g. patterns received on an accepted line).
+   */
+  phasesComplete?: number;
+  /**
+   * When true, every phase after the completed ones has no timeline yet and is
+   * shown as TBD instead of a planned bar.
+   */
+  timelineTbd?: boolean;
   /** Optional schedule % override. Otherwise derived from status. */
   schedulePct?: number;
 }
@@ -68,7 +80,11 @@ const SCHEDULE_PCT: Record<PipelineStatus, number> = {
 
 /** Returns the percent schedule complete for a line. */
 export function schedulePct(row: PipelineLine): number {
-  return row.schedulePct ?? SCHEDULE_PCT[row.status];
+  if (row.schedulePct !== undefined) return row.schedulePct;
+  if (row.phasesComplete !== undefined) {
+    return Math.round((row.phasesComplete / PHASE_TEMPLATES.length) * 100);
+  }
+  return SCHEDULE_PCT[row.status];
 }
 
 interface PhaseTemplate {
@@ -107,14 +123,27 @@ const ACTIVE_INDEX_BY_STATUS: Record<PipelineStatus, number | null> = {
 /** Returns the schedule phases for a line, deriving from status if not present. */
 export function phasesFor(row: PipelineLine): Phase[] {
   if (row.phases) return row.phases;
-  const completeCount = PHASES_COMPLETE_BY_STATUS[row.status];
-  const activeIdx = ACTIVE_INDEX_BY_STATUS[row.status];
+  const completeCount =
+    row.phasesComplete ?? PHASES_COMPLETE_BY_STATUS[row.status];
+  const activeIdx =
+    row.phasesComplete !== undefined ? null : ACTIVE_INDEX_BY_STATUS[row.status];
   return PHASE_TEMPLATES.map((t, i) => {
     let cls: PhaseClass = "future";
     let label = t.name.toUpperCase();
     if (i < completeCount) {
       cls = "complete";
       label = "DONE";
+    } else if (row.timelineTbd) {
+      return {
+        name: t.name,
+        phase: `${t.phase} / TBD`,
+        cls: "future" as const,
+        label: "TIMELINE TBD",
+        left: t.left,
+        width: t.width,
+        milestone: t.milestone,
+        tbd: true,
+      };
     } else if (i === activeIdx) {
       cls = "active";
       label = "IN PROGRESS";

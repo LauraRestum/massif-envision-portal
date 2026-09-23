@@ -144,7 +144,7 @@ export default function GanttCard({ programs, selected, onSelect }: GanttCardPro
             <div className="gantt-header">
               <div className="label-col">PHASE</div>
               {MONTHS.map((m) => (
-                <div key={m} className={m === "AUG" ? "now" : undefined}>
+                <div key={m} className={m === "SEP" ? "now" : undefined}>
                   {m}
                 </div>
               ))}
@@ -160,11 +160,15 @@ export default function GanttCard({ programs, selected, onSelect }: GanttCardPro
                   {Array.from({ length: 12 }).map((_, i) => (
                     <div key={i} className="month-cell"></div>
                   ))}
-                  {row.milestone ? (
+                  {row.tbd ? (
+                    <div className="gantt-tbd" title={`${row.name}: timeline to be determined`}>
+                      {row.label}
+                    </div>
+                  ) : row.milestone ? (
                     <div
                       className={`gantt-milestone ${row.cls}`}
                       style={{ left: row.left }}
-                      title={row.name}
+                      title={`${row.name} — ${row.label}`}
                     ></div>
                   ) : (
                     <div
@@ -199,6 +203,11 @@ export default function GanttCard({ programs, selected, onSelect }: GanttCardPro
             <div className="item">
               <div className="sw future"></div>Planned
             </div>
+            {rows.some((r) => r.tbd) && (
+              <div className="item">
+                <div className="sw tbd"></div>Timeline TBD
+              </div>
+            )}
           </div>
         </div>
       </div>

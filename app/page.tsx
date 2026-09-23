@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import pipelineData from "@/data/pipeline.json";
-import updatesData from "@/data/updates.json";
 import {
   formatNavDate,
   latestUpdate,
@@ -11,9 +10,7 @@ import {
   type PipelineLine,
   type PipelineStatus,
 } from "@/lib/types";
-import { sortUpdates, type UpdateEntry } from "@/lib/updates";
 import Nav from "./components/Nav";
-import UpdateTicker from "./components/UpdateTicker";
 import Hero from "./components/Hero";
 import KpiStats from "./components/KpiStats";
 import GanttCard from "./components/GanttCard";
@@ -30,7 +27,6 @@ import SubmitModal from "./components/SubmitModal";
 type FilterKey = "all" | PipelineStatus;
 
 const DATA = pipelineData as PipelineLine[];
-const UPDATES = sortUpdates(updatesData as UpdateEntry[]);
 
 const DEFAULT_PROGRAM_EST =
   DATA.find((r) => r.priority)?.est ??
@@ -218,18 +214,6 @@ export default function Page() {
     [scrollToPipeline]
   );
 
-  /** Ticker item: search for that EST and jump to it, clearing any filter
-      that would otherwise hide the line the user just clicked. */
-  const handleTickerEst = useCallback(
-    (est: string) => {
-      setQuery(est);
-      setFilter("all");
-      setAwaitFilter("all");
-      scrollToPipeline();
-    },
-    [scrollToPipeline]
-  );
-
   return (
     <>
       <a href="#pipeline" className="skip-link">
@@ -241,7 +225,6 @@ export default function Page() {
         onQueryChange={setQuery}
         lastUpdate={lastUpdate}
       />
-      <UpdateTicker items={UPDATES} onSelectEst={handleTickerEst} />
       <main id="main">
         <Hero />
         <KpiStats data={DATA} filter={filter} onFilterChange={handleKpiFilter} />
