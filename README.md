@@ -35,6 +35,13 @@ lib/
 └── types.ts                # PipelineLine, PipelineStatus, STATUS_LABEL
 ```
 
+## Light and dark themes
+
+The page defaults to the light theme. The Light / Dark toggle in the nav sets
+`data-theme` on `<html>` and stores the choice in the browser. Both palettes live
+in `app/globals.css`: the `:root` block holds the light tokens and the
+`:root[data-theme="dark"]` block overrides them.
+
 ## Editing the pipeline
 
 Update `data/pipeline.json` and commit. The dashboard re-renders automatically

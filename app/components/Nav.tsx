@@ -1,5 +1,7 @@
 "use client";
 
+import ThemeToggle from "./ThemeToggle";
+
 interface NavProps {
   liveCount: number;
   query: string;
@@ -17,9 +19,15 @@ export default function Nav({
     <nav className="nav" aria-label="Primary">
       <div className="nav-brand">
         {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* One wordmark per theme; the stylesheet shows whichever matches. */}
         <img
-          className="nav-envision"
+          className="nav-envision nav-envision-light"
           src="/envision-wordmark-blue.png"
+          alt="Envision"
+        />
+        <img
+          className="nav-envision nav-envision-dark"
+          src="/envision-wordmark.png"
           alt="Envision"
         />
         <span className="nav-x" aria-hidden="true">
@@ -51,6 +59,7 @@ export default function Nav({
         <span>
           <span id="liveCount">{liveCount}</span> Active Lines
         </span>
+        <ThemeToggle />
       </div>
     </nav>
   );
