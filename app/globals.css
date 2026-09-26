@@ -291,7 +291,7 @@
   }
   .nav .nav-search-wrap { width: 100%; max-width: 480px; justify-self: center; }
   .nav-brand { display: flex; align-items: center; gap: 1.75rem; }
-  .nav-envision { height: 38px; width: auto; opacity: 0.95; }
+  .nav-envision { height: 46px; width: auto; opacity: 0.95; }
   .nav-envision-dark { display: none; }
   :root[data-theme="dark"] .nav-envision-light { display: none; }
   :root[data-theme="dark"] .nav-envision-dark { display: inline; }

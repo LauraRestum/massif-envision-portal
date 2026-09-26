@@ -22,12 +22,12 @@ export default function Nav({
         {/* One wordmark per theme; the stylesheet shows whichever matches. */}
         <img
           className="nav-envision nav-envision-light"
-          src="/envision-wordmark-blue.png"
+          src="/envision-logo-blue.png"
           alt="Envision"
         />
         <img
           className="nav-envision nav-envision-dark"
-          src="/envision-wordmark.png"
+          src="/envision-logo-white.png"
           alt="Envision"
         />
         <span className="nav-x" aria-hidden="true">
