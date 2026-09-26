@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import pipelineData from "@/data/pipeline.json";
 import {
+  activeLines,
   formatNavDate,
   latestUpdate,
   matchesAwaitFilter,
@@ -27,11 +28,14 @@ import SubmitModal from "./components/SubmitModal";
 type FilterKey = "all" | PipelineStatus;
 
 const DATA = pipelineData as PipelineLine[];
+/** Lines in the active pipeline; transitioning programs are listed but not counted. */
+const ACTIVE = activeLines(DATA);
 
 const DEFAULT_PROGRAM_EST =
-  DATA.find((r) => r.priority)?.est ??
-  DATA.find((r) => r.status === "accepted")?.est ??
-  DATA[0]?.est ??
+  ACTIVE.find((r) => r.priority)?.est ??
+  ACTIVE.find((r) => r.phases)?.est ??
+  ACTIVE.find((r) => r.status === "accepted")?.est ??
+  ACTIVE[0]?.est ??
   "";
 
 const VALID_FILTERS: FilterKey[] = [
@@ -84,7 +88,7 @@ function readParams(): {
   const sortKey = p.get("sort") as SortKey | null;
   const sortDir = p.get("dir") as SortDir | null;
   const program = p.get("program");
-  const programValid = program && DATA.some((r) => r.est === program);
+  const programValid = program && ACTIVE.some((r) => r.est === program);
   return {
     filter: filter && VALID_FILTERS.includes(filter) ? filter : "all",
     awaitFilter:
@@ -155,7 +159,7 @@ export default function Page() {
   /** Programs selectable for the Gantt: priority + accepted + production lines, parent-only. */
   const ganttPrograms = useMemo(
     () =>
-      DATA.filter((r) => {
+      ACTIVE.filter((r) => {
         if (r.est.includes(".")) return false;
         return (
           r.priority ||
@@ -172,7 +176,7 @@ export default function Page() {
   const selectedProgram =
     ganttPrograms.find((p) => p.est === program) ??
     ganttPrograms[0] ??
-    DATA[0];
+    ACTIVE[0];
 
   const handleSortChange = useCallback((k: SortKey, d: SortDir) => {
     setSortKey(k);
@@ -227,14 +231,14 @@ export default function Page() {
       />
       <main id="main">
         <Hero />
-        <KpiStats data={DATA} filter={filter} onFilterChange={handleKpiFilter} />
+        <KpiStats data={ACTIVE} filter={filter} onFilterChange={handleKpiFilter} />
         <GanttCard
           programs={ganttPrograms}
           selected={selectedProgram}
           onSelect={setProgram}
         />
         <BridgeStrip
-          data={DATA}
+          data={ACTIVE}
           awaitFilter={awaitFilter}
           onAwaitFilterChange={handleBridgeFilter}
         />

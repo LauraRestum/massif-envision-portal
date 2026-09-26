@@ -1633,6 +1633,33 @@
   .await-clear .await-what,
   .await-clear { font-weight: 700; }
 
+  /* ---------- Transitioning lines ----------
+     Programs moving to another production partner: listed for reference,
+     visibly set apart from the active pipeline. */
+  .await-transition {
+    color: var(--text-muted);
+    border-style: dashed;
+    background: transparent;
+    font-weight: 700;
+  }
+  .pgroup-note {
+    margin: -0.35rem 0 1rem;
+    max-width: 62ch;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+  .pcard.is-transitioning {
+    border-style: dashed;
+    background: var(--surface-tint);
+  }
+  .pcard.is-transitioning .stat {
+    color: var(--text-muted);
+  }
+  .pipeline-table tr.is-transitioning td {
+    color: var(--text-muted);
+  }
+
   /* ---------- Pipeline table view ---------- */
   .pipeline-table-wrap {
     overflow-x: auto;

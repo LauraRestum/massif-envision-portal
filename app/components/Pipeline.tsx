@@ -6,6 +6,8 @@ import {
   PipelineLine,
   PipelineStatus,
   STATUS_LABEL,
+  TRANSITION_LABEL,
+  TRANSITION_NOTE,
   isVariant,
   matchesAwaitFilter,
   parentEstOf,
@@ -44,17 +46,19 @@ const STATUS_ORDER: Record<PipelineStatus, number> = {
   production: 3,
 };
 
-type GroupKey = "massif" | "envision" | "ready";
+type GroupKey = "massif" | "envision" | "ready" | "transitioning";
 
 const GROUP_LABEL: Record<GroupKey, React.ReactNode> = {
   massif: <>Waiting on <span className="massif-brand">Massif</span></>,
   envision: "In progress at Envision",
   ready: "Ready to advance",
+  transitioning: TRANSITION_LABEL,
 };
 
-const GROUP_ORDER: GroupKey[] = ["massif", "envision", "ready"];
+const GROUP_ORDER: GroupKey[] = ["massif", "envision", "ready", "transitioning"];
 
 function groupOf(row: PipelineLine): GroupKey {
+  if (row.transitioning) return "transitioning";
   if (row.awaitingFrom === "massif") return "massif";
   if (row.awaitingFrom === "envision") return "envision";
   return "ready";
@@ -124,7 +128,7 @@ export default function Pipeline({
     const groups: Record<
       GroupKey,
       { parent: PipelineLine; variants: PipelineLine[] }[]
-    > = { massif: [], envision: [], ready: [] };
+    > = { massif: [], envision: [], ready: [], transitioning: [] };
     for (const item of nestedAll) groups[groupOf(item.parent)].push(item);
     for (const key of GROUP_ORDER) {
       groups[key].sort((a, b) => {
@@ -139,7 +143,12 @@ export default function Pipeline({
   }, [nestedAll]);
 
   const groupedCounts = useMemo(() => {
-    const counts: Record<GroupKey, number> = { massif: 0, envision: 0, ready: 0 };
+    const counts: Record<GroupKey, number> = {
+      massif: 0,
+      envision: 0,
+      ready: 0,
+      transitioning: 0,
+    };
     for (const item of nestedAll) {
       counts[groupOf(item.parent)] += 1 + item.variants.length;
     }
@@ -285,6 +294,9 @@ export default function Pipeline({
                   <h3 className="pgroup-title">{GROUP_LABEL[g]}</h3>
                   <span className="pgroup-count">{groupedCounts[g]}</span>
                 </div>
+                {g === "transitioning" && (
+                  <p className="pgroup-note">{TRANSITION_NOTE}</p>
+                )}
                 <div className="pipeline-cards">
                   {items.map(({ parent, variants }) => (
                     <PipelineCard
@@ -371,7 +383,7 @@ export default function Pipeline({
                     key={r.est}
                     className={`${r.priority ? "is-priority" : ""} ${
                       variant ? "is-variant" : ""
-                    }`.trim()}
+                    } ${r.transitioning ? "is-transitioning" : ""}`.trim()}
                   >
                     <td className="t-est">
                       {variant && (
@@ -459,6 +471,16 @@ function AwaitingChip({
   row: PipelineLine;
   compact?: boolean;
 }) {
+  if (row.transitioning) {
+    return (
+      <span
+        className={`await-chip await-transition${compact ? " compact" : ""}`}
+        title={TRANSITION_NOTE}
+      >
+        {TRANSITION_LABEL}
+      </span>
+    );
+  }
   if (!row.awaitingFrom) {
     return (
       <span className={`await-chip await-clear${compact ? " compact" : ""}`}>
@@ -547,7 +569,7 @@ function PipelineCard({
     <article
       className={`pcard${row.priority ? " priority" : ""}${
         hasVariants ? " has-variants" : ""
-      }`}
+      }${row.transitioning ? " is-transitioning" : ""}`}
     >
       <div className="top">
         <div className="est">EST {row.est}</div>

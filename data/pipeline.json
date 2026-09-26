@@ -15,8 +15,8 @@
     "awaitingItem": null,
     "annualQty": 13000,
     "price": 77.13,
-    "priority": true,
-    "updatedAt": "2026-09-23",
+    "transitioning": true,
+    "updatedAt": "2026-09-26",
     "schedulePct": 84,
     "phases": [
       { "name": "Tech Pack", "phase": "01 / COMPLETE", "cls": "complete", "label": "RECEIVED", "left": "0%", "width": "16.6%" },
@@ -29,9 +29,9 @@
       { "name": "Production Run Live", "phase": "08 / MILESTONE", "cls": "future", "label": "PRODUCTION RUN LIVE", "left": "91.6%", "width": "0%", "milestone": true }
     ]
   },
-  { "est": "1054.a", "desc": "Flight Suit Pant Military V2 OCP", "sku": "MPNT00069O", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": 77.13, "updatedAt": "2026-09-23" },
-  { "est": "1054.b", "desc": "Flight Suit Pant Military V3 MP249A", "sku": "MPNT00069", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": 77.13, "updatedAt": "2026-09-23" },
-  { "est": "1054.c", "desc": "Flight Suit Pant Military V4 MP249A", "sku": "MPNT00084", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": 77.13, "updatedAt": "2026-09-23" },
+  { "est": "1054.a", "desc": "Flight Suit Pant Military V2 OCP", "sku": "MPNT00069O", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": 77.13, "transitioning": true, "updatedAt": "2026-09-26" },
+  { "est": "1054.b", "desc": "Flight Suit Pant Military V3 MP249A", "sku": "MPNT00069", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": 77.13, "transitioning": true, "updatedAt": "2026-09-26" },
+  { "est": "1054.c", "desc": "Flight Suit Pant Military V4 MP249A", "sku": "MPNT00084", "status": "accepted", "awaitingFrom": "envision", "awaitingItem": "Sample", "annualQty": null, "price": 77.13, "transitioning": true, "updatedAt": "2026-09-26" },
   {
     "est": "1037",
     "desc": "Inversion Bottom Lightweight",

@@ -10,6 +10,8 @@ export function matchesAwaitFilter(
   row: PipelineLine,
   f: AwaitFilterKey
 ): boolean {
+  // Transitioning lines sit outside the active stages; only "all" shows them.
+  if (row.transitioning) return f === "all";
   switch (f) {
     case "massif":
       return row.awaitingFrom === "massif";
@@ -47,6 +49,12 @@ export interface PipelineLine {
   annualQty: number | null;
   price: number | null;
   priority?: boolean;
+  /**
+   * When true, the program is moving to another production partner. The line
+   * stays listed for reference, labeled as such, but is left out of the KPI
+   * counts, the stage strip, and the schedule selector.
+   */
+  transitioning?: boolean;
   updatedAt?: string;
   /** Optional hand-crafted schedule. If omitted, derived from status. */
   phases?: Phase[];
@@ -62,6 +70,16 @@ export interface PipelineLine {
   timelineTbd?: boolean;
   /** Optional schedule % override. Otherwise derived from status. */
   schedulePct?: number;
+}
+
+/** Short label and note shown on transitioning lines. */
+export const TRANSITION_LABEL = "Transitioning to a new partner";
+export const TRANSITION_NOTE =
+  "This program is moving to another production partner. It remains listed for reference and is no longer part of the active pipeline.";
+
+/** Lines still in the active pipeline (everything not transitioning). */
+export function activeLines(lines: PipelineLine[]): PipelineLine[] {
+  return lines.filter((r) => !r.transitioning);
 }
 
 export const STATUS_LABEL: Record<PipelineStatus, string> = {
