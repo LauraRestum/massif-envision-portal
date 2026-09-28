@@ -6,8 +6,8 @@ export default function Hero() {
         Pipeline at <em>a glance</em>
       </h1>
       <p>
-        Every active opportunity, every program milestone, in one view. Shared
-        between Envision and <span className="massif-brand">Massif</span>.
+        The Inversion line in production today, and the future lines Envision
+        and <span className="massif-brand">Massif</span> are looking at next.
       </p>
     </section>
   );

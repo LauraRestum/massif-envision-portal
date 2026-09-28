@@ -508,7 +508,7 @@ function EmptyState({
             or clear the search to see all lines.
           </>
         ) : (
-          "Try a different status filter to see active opportunities."
+          "Try a different status filter to see more lines."
         )}
       </div>
       {isSearch && (

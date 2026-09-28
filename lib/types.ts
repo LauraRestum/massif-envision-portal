@@ -165,7 +165,7 @@ export function phasesFor(row: PipelineLine): Phase[] {
 
 const VARIANT_RE = /^(\d+)\.([a-z0-9]+)$/i;
 
-/** If est is a variant id (e.g. "1054.a"), returns its parent EST ("1054"). */
+/** If est is a variant id (e.g. "1002.a"), returns its parent EST ("1002"). */
 export function parentEstOf(est: string): string | null {
   const m = VARIANT_RE.exec(est);
   return m ? m[1] : null;

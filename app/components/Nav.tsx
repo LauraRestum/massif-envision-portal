@@ -49,7 +49,7 @@ export default function Nav({
       <div className="nav-meta" aria-live="polite">
         <span>Last Update {lastUpdate}</span>
         <span>
-          <span id="liveCount">{liveCount}</span> Active Lines
+          <span id="liveCount">{liveCount}</span> Lines
         </span>
       </div>
     </nav>
