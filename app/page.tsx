@@ -40,6 +40,7 @@ const VALID_FILTERS: FilterKey[] = [
   "pending",
   "quoted",
   "accepted",
+  "review",
   "production",
 ];
 const VALID_AWAIT_FILTERS: AwaitFilterKey[] = [
@@ -47,6 +48,7 @@ const VALID_AWAIT_FILTERS: AwaitFilterKey[] = [
   "massif",
   "envision",
   "ready",
+  "review",
 ];
 const VALID_VIEWS: ViewMode[] = ["cards", "table"];
 const VALID_SORT_KEYS: SortKey[] = [

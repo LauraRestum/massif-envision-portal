@@ -21,6 +21,7 @@ const STATS: StatDef[] = [
   { key: "pending", cls: "s-pending", label: "Pending" },
   { key: "quoted", cls: "s-quoted", label: "Quoted" },
   { key: "accepted", cls: "s-accepted", label: "Accepted" },
+  { key: "review", cls: "s-review", label: "In Review" },
   { key: "production", cls: "s-production", label: "Production" },
 ];
 
@@ -51,11 +52,18 @@ export default function KpiStats({ data, filter, onFilterChange }: KpiStatsProps
     pending: 0,
     quoted: 0,
     accepted: 0,
+    review: 0,
     production: 0,
   };
   for (const row of data) {
     counts[row.status]++;
   }
+
+  // Only statuses that have lines get a square, so an empty "00" never
+  // suggests work that isn't there.
+  const shown = STATS.filter(
+    (s) => counts[s.key as PipelineStatus] > 0 || filter === s.key
+  );
 
   useEffect(() => {
     const respectReducedMotion = window.matchMedia(
@@ -76,11 +84,12 @@ export default function KpiStats({ data, filter, onFilterChange }: KpiStatsProps
   return (
     <div
       className="stats"
+      style={{ ["--stat-cols" as string]: shown.length }}
       ref={containerRef}
       role="group"
       aria-label="Pipeline status filters"
     >
-      {STATS.map((s) => {
+      {shown.map((s) => {
         const value = String(counts[s.key as PipelineStatus]).padStart(2, "0");
         const isActive = filter === s.key;
         const handleToggle = () => {

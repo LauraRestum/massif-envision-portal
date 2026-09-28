@@ -1,9 +1,18 @@
-export type PipelineStatus = "pending" | "quoted" | "accepted" | "production";
+/**
+ * "review" marks a line that is not the Inversion shirt: shown as In Review,
+ * with no awaiting party and no timeline, rather than as committed work.
+ */
+export type PipelineStatus =
+  | "pending"
+  | "quoted"
+  | "accepted"
+  | "review"
+  | "production";
 
 export type AwaitingFrom = "massif" | "envision" | null;
 
 /** Filter dimension keyed off `awaitingFrom`. "all" applies no constraint. */
-export type AwaitFilterKey = "all" | "massif" | "envision" | "ready";
+export type AwaitFilterKey = "all" | "massif" | "envision" | "ready" | "review";
 
 /** True if a line satisfies the given awaiting-stage filter. */
 export function matchesAwaitFilter(
@@ -16,7 +25,9 @@ export function matchesAwaitFilter(
     case "envision":
       return row.awaitingFrom === "envision";
     case "ready":
-      return row.awaitingFrom === null;
+      return row.awaitingFrom === null && row.status !== "review";
+    case "review":
+      return row.status === "review";
     default:
       return true;
   }
@@ -68,6 +79,7 @@ export const STATUS_LABEL: Record<PipelineStatus, string> = {
   pending: "Pending",
   quoted: "Quoted",
   accepted: "Accepted",
+  review: "In Review",
   production: "In Production",
 };
 
@@ -75,6 +87,7 @@ const SCHEDULE_PCT: Record<PipelineStatus, number> = {
   pending: 12,
   quoted: 26,
   accepted: 32,
+  review: 26,
   production: 78,
 };
 
@@ -110,6 +123,7 @@ const PHASES_COMPLETE_BY_STATUS: Record<PipelineStatus, number> = {
   pending: 1,
   quoted: 3,
   accepted: 3,
+  review: 3,
   production: 6,
 };
 
@@ -117,6 +131,7 @@ const ACTIVE_INDEX_BY_STATUS: Record<PipelineStatus, number | null> = {
   pending: null,
   quoted: null,
   accepted: 3,
+  review: null,
   production: 6,
 };
 

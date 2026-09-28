@@ -184,7 +184,7 @@
     margin: 0 auto;
     padding: 1.5rem 3rem 2.5rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
     gap: 1.25rem;
   }
   .stat {
@@ -231,6 +231,7 @@
   .stat.s-pending    { --accent: var(--env-blue-dim); }
   .stat.s-quoted     { --accent: #2188C4; }
   .stat.s-accepted   { --accent: var(--env-blue); }
+  .stat.s-review     { --accent: #53565A; }
   .stat.s-production { --accent: var(--env-forest); }
   .stat .l {
     font-size: 0.85rem; letter-spacing: 0.2em;
@@ -714,6 +715,7 @@
   .pcard .stat.pending    { color: var(--env-blue-dim); }
   .pcard .stat.quoted     { color: var(--env-bright-blue-ink); }
   .pcard .stat.accepted   { color: var(--env-blue); }
+  .pcard .stat.review     { color: #53565A; }
   .pcard .stat.production { color: var(--env-green-ink); }
   .pcard .name {
     font-size: 1.1rem;
@@ -1625,6 +1627,7 @@
   .await-massif { color: var(--ocp-tan); }
   .await-envision { color: var(--env-bright-blue-ink); }
   .await-clear { color: var(--env-green-ink); }
+  .await-review { color: #53565A; }
   .await-who { font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.72rem; }
   .await-chip.compact .await-who { font-size: 0.68rem; }
   .await-sep { opacity: 0.55; }
@@ -1724,6 +1727,7 @@
   .status-chip.s-pending { color: var(--env-blue-dim); }
   .status-chip.s-quoted { color: var(--env-bright-blue-ink); }
   .status-chip.s-accepted { color: var(--env-blue); }
+  .status-chip.s-review { color: #53565A; }
   .status-chip.s-production { color: var(--env-green-ink); }
 
   /* ---------- Responsive ---------- */
