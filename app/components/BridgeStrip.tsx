@@ -1,6 +1,10 @@
 "use client";
 
-import type { AwaitFilterKey, PipelineLine } from "@/lib/types";
+import {
+  matchesAwaitFilter,
+  type AwaitFilterKey,
+  type PipelineLine,
+} from "@/lib/types";
 
 interface BridgeStripProps {
   data: PipelineLine[];
@@ -17,7 +21,7 @@ export default function BridgeStrip({
   const inProgressEnvision = data.filter(
     (r) => r.awaitingFrom === "envision"
   ).length;
-  const ready = data.filter((r) => r.awaitingFrom === null).length;
+  const inReview = data.filter((r) => matchesAwaitFilter(r, "review")).length;
   const inMotion = data.length;
 
   /** Toggle a filter off when re-clicking the active one. */
@@ -52,18 +56,18 @@ export default function BridgeStrip({
           ariaLabel={`In progress at Envision (${inProgressEnvision})`}
         />
         <BridgeStat
-          value={ready}
-          active={awaitFilter === "ready"}
-          onClick={() => toggle("ready")}
-          label="Ready to advance"
-          ariaLabel={`Ready to advance (${ready})`}
+          value={inReview}
+          active={awaitFilter === "review"}
+          onClick={() => toggle("review")}
+          label="In review"
+          ariaLabel={`In review (${inReview})`}
         />
         <BridgeStat
           value={inMotion}
           active={awaitFilter === "all"}
           onClick={() => onAwaitFilterChange("all")}
-          label="Lines in motion"
-          ariaLabel={`Show all ${inMotion} lines in motion`}
+          label="All lines"
+          ariaLabel={`Show all ${inMotion} lines`}
         />
       </div>
     </section>

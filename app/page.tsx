@@ -30,6 +30,7 @@ const DATA = pipelineData as PipelineLine[];
 
 const DEFAULT_PROGRAM_EST =
   DATA.find((r) => r.priority)?.est ??
+  DATA.find((r) => r.status === "production")?.est ??
   DATA.find((r) => r.status === "accepted")?.est ??
   DATA[0]?.est ??
   "";
@@ -39,6 +40,7 @@ const VALID_FILTERS: FilterKey[] = [
   "pending",
   "quoted",
   "accepted",
+  "review",
   "production",
 ];
 const VALID_AWAIT_FILTERS: AwaitFilterKey[] = [
@@ -46,6 +48,7 @@ const VALID_AWAIT_FILTERS: AwaitFilterKey[] = [
   "massif",
   "envision",
   "ready",
+  "review",
 ];
 const VALID_VIEWS: ViewMode[] = ["cards", "table"];
 const VALID_SORT_KEYS: SortKey[] = [

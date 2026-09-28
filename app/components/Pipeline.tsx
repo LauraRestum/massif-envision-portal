@@ -17,6 +17,7 @@ const AWAIT_FILTER_LABEL: Record<Exclude<AwaitFilterKey, "all">, string> = {
   massif: "Waiting on Massif",
   envision: "In progress at Envision",
   ready: "Ready to advance",
+  review: "In review",
 };
 export type ViewMode = "cards" | "table";
 export type SortKey = "est" | "desc" | "status" | "awaiting" | "qty" | "price";
@@ -41,20 +42,31 @@ const STATUS_ORDER: Record<PipelineStatus, number> = {
   pending: 0,
   quoted: 1,
   accepted: 2,
-  production: 3,
+  review: 3,
+  production: 4,
 };
 
-type GroupKey = "massif" | "envision" | "ready";
+type GroupKey = "production" | "massif" | "envision" | "ready" | "review";
 
 const GROUP_LABEL: Record<GroupKey, React.ReactNode> = {
+  production: "In production",
   massif: <>Waiting on <span className="massif-brand">Massif</span></>,
   envision: "In progress at Envision",
   ready: "Ready to advance",
+  review: "In review",
 };
 
-const GROUP_ORDER: GroupKey[] = ["massif", "envision", "ready"];
+const GROUP_ORDER: GroupKey[] = [
+  "production",
+  "massif",
+  "envision",
+  "ready",
+  "review",
+];
 
 function groupOf(row: PipelineLine): GroupKey {
+  if (row.status === "review") return "review";
+  if (row.status === "production" && !row.awaitingFrom) return "production";
   if (row.awaitingFrom === "massif") return "massif";
   if (row.awaitingFrom === "envision") return "envision";
   return "ready";
@@ -124,7 +136,7 @@ export default function Pipeline({
     const groups: Record<
       GroupKey,
       { parent: PipelineLine; variants: PipelineLine[] }[]
-    > = { massif: [], envision: [], ready: [] };
+    > = { production: [], massif: [], envision: [], ready: [], review: [] };
     for (const item of nestedAll) groups[groupOf(item.parent)].push(item);
     for (const key of GROUP_ORDER) {
       groups[key].sort((a, b) => {
@@ -139,7 +151,13 @@ export default function Pipeline({
   }, [nestedAll]);
 
   const groupedCounts = useMemo(() => {
-    const counts: Record<GroupKey, number> = { massif: 0, envision: 0, ready: 0 };
+    const counts: Record<GroupKey, number> = {
+      production: 0,
+      massif: 0,
+      envision: 0,
+      ready: 0,
+      review: 0,
+    };
     for (const item of nestedAll) {
       counts[groupOf(item.parent)] += 1 + item.variants.length;
     }
@@ -459,11 +477,19 @@ function AwaitingChip({
   row: PipelineLine;
   compact?: boolean;
 }) {
+  if (row.status === "review") {
+    return (
+      <span className={`await-chip await-review${compact ? " compact" : ""}`}>
+        <span className="await-dot" aria-hidden="true" />
+        Under review
+      </span>
+    );
+  }
   if (!row.awaitingFrom) {
     return (
       <span className={`await-chip await-clear${compact ? " compact" : ""}`}>
         <span className="await-dot" aria-hidden="true" />
-        Ready to advance
+        {row.status === "production" ? "In production" : "Ready to advance"}
       </span>
     );
   }
@@ -508,7 +534,7 @@ function EmptyState({
             or clear the search to see all lines.
           </>
         ) : (
-          "Try a different status filter to see active opportunities."
+          "Try a different status filter to see more lines."
         )}
       </div>
       {isSearch && (

@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Massif Program Pipeline — Envision",
   description:
-    "Every active opportunity, every program milestone, in one view. Shared between Envision and Massif.",
+    "The Inversion line in production today, and the future lines Envision and Massif are looking at next.",
 };
 
 export default function RootLayout({

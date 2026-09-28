@@ -192,7 +192,7 @@ export default function SubmitModal({ open, onClose }: SubmitModalProps) {
                   type="text"
                   value={est}
                   onChange={(e) => setEst(e.target.value)}
-                  placeholder="e.g. 1054"
+                  placeholder="e.g. 1002"
                 />
               </div>
               <div className="field">
